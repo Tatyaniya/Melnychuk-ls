@@ -1,0 +1,72 @@
+.hero {
+    padding-top: 54px;
+    position: relative;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 24%;
+
+        @include desktop {
+            padding: 0 10%;
+        }
+    }
+
+    &__downbutton {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-bottom: 5%;
+    }
+}
+
+.userinfo {
+    display: flex;
+
+    @include tablets {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    &__title {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 30px;
+        color: rgba($text-color, .5);
+        text-align: right;
+        padding-top: 10px;
+        margin-right: 5%;
+    }
+
+    &__name {
+        flex-basis: 427px;
+        font-weight: 800;
+        font-size: 72px;
+        line-height: 60px;
+        line-height: 1;
+
+        @include phones {
+            font-size: 36px;
+        }
+    }
+}
+
+.scroll-down {
+    background: url('');
+
+    &__link {
+        font-size: 18px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+}

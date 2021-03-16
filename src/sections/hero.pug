@@ -1,0 +1,43 @@
+section.fullscreen-section.hero
+    .container.hero__container
+        header.header
+            a.logo(href="#") BA
+            .header__menu 
+                nav.menu
+                    ul.menu__list
+                        -
+                            const menuLinks = {
+                                about: "Обо мне", 
+                                skills: "Навыки", 
+                                works: "Работы", 
+                                reviews: "Отзывы"
+                            };
+
+                        each value, key in menuLinks
+                            li.menu__item
+                                a(href=`#${key}`).menu__link #{value}
+
+            .header__social
+                ul.socials
+                    -
+                        const socialLinks = {
+                            insta: "https://www.instagram.com/", 
+                            vk: "https://www.facebook.com/", 
+                            github: "https://github.com/", 
+                            envelope: "mailto:mail@mail.com"
+                        };
+
+                    each value, key in socialLinks
+                        li.socials__item
+                            a(href=`${value}`).socials__link&attributes({'target': '_blank'})
+                                +icon(key, 'socials__icon')
+                   
+
+        .hero__content
+            h1.userinfo
+                .userinfo__title Личный сайт #[br] веб разработчика
+                .userinfo__name Владимир Астаханов
+        .hero__downbutton
+            .scroll-down
+                a(href="#about").scroll-down__link Скролл
+            
