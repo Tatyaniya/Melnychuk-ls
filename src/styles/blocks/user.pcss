@@ -1,0 +1,33 @@
+.user {
+    &__avatar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 70px;
+    }
+
+    &__avatar-wrap {
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 50%;
+        box-shadow: 0px 10px 24px 0 rgba(#000, .3);
+        flex-shrink: 0;
+    }
+
+    &__table {
+        font-weight: 600;
+        width: 100%;
+
+        td {
+            padding-bottom: 12px;
+        }
+
+        tr:last-child td {
+            padding-bottom: 0;
+        }
+    }
+
+    &__table-title {
+        color: rgba($text-color, .3);
+    }
+}

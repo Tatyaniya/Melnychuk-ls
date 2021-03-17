@@ -2,6 +2,7 @@
   "text-color": "#fff",
   "links-color": "#fff",
   "errors-color": "#cd1515",
+  "ps-color": "#DB0200",
   "bp-desktop-hd": "1800px",
   "bp-desktop": "1200px",
   "bp-tablets": "768px",

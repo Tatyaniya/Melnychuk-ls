@@ -25,7 +25,7 @@
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        padding-bottom: 5%;
+        padding-bottom: 3%;
     }
 }
 
@@ -62,11 +62,22 @@
 }
 
 .scroll-down {
-    background: url('');
+    display: flex;
 
     &__link {
         font-size: 18px;
         font-weight: 600;
         text-decoration: none;
+
+        & span {
+            display: inline-block;
+            margin-right: 15px;
+        }
+    }
+
+    &__arrow {
+        width: 14px;
+        height: 14px;
+        fill: #fff;
     }
 }
