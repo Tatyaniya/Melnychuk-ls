@@ -68,10 +68,15 @@
         font-size: 18px;
         font-weight: 600;
         text-decoration: none;
+        transition: all .4s ease;
 
         & span {
             display: inline-block;
             margin-right: 15px;
+        }
+
+        &:hover {
+            color: rgba($text-color, .5);
         }
     }
 
@@ -79,5 +84,12 @@
         width: 14px;
         height: 14px;
         fill: #fff;
+        transition: all .4s ease;
     }
 }
+
+.scroll-down__link:hover .scroll-down__arrow {
+    fill: rgba($text-color, .5);
+    transform: translateY(5px);
+}
+

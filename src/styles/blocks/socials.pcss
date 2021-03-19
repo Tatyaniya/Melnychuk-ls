@@ -1,0 +1,22 @@
+.socials {
+    display: flex;
+
+    &__item {
+        margin-right: 40px;
+
+        &:last-child {
+            margin-right: 0px;
+        }
+    }
+
+    &__icon {
+        width: 25px;
+        height: 25px;
+        fill: rgba($text-color, .3);
+        transition: all .4s ease;
+
+        &:hover {
+            fill: rgba($text-color, .7);
+        }
+    }
+}
