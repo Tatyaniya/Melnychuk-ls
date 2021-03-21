@@ -35,6 +35,9 @@ footer.footer
                         each value, key in socialLinks
                             li.socials__item 
                                 a(href=`${value}`).socials__link&attributes({'target': '_blank'})
+                                    - var icon = require(`images/icons/${key}.svg`).default;
+                                    svg(class="socials__icon" viewBox=icon.viewBox preserveAspectRatio="none")
+                                        use(xlink:href=`sprite.svg#${icon.id.replace('-usage', '')}`)  
                                     //+icon(key, 'socials__icon')                                
             .footer__right
                 .footer__quote 

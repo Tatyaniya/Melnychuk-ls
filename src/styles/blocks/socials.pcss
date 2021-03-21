@@ -14,9 +14,28 @@
         height: 25px;
         fill: rgba($text-color, .3);
         transition: all .4s ease;
+    }
 
-        &:hover {
-            fill: rgba($text-color, .7);
-        }
+    &__link:hover .socials__icon {
+        fill: rgba($text-color, .7);
+    }
+}
+
+.footer .socials__link {
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba($text-color, 0.3);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .4s ease;
+
+    &:hover {
+        border: 1px solid rgba($text-color, .6);
+    }
+
+    &:hover .socials__icon {
+        fill: rgba($text-color, .6);
     }
 }
