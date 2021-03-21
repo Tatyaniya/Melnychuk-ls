@@ -1,0 +1,37 @@
+.view-site {
+    display: flex;
+
+    &__icon {
+        width: 23px;
+        height: 23px;
+        margin-right: 16px;
+        fill: #586ED3;
+    }
+
+    &__link {
+        font-size: 18px;
+        font-weight: 700;
+        color: $purple;
+        text-decoration: none;
+        position: relative;
+
+        &:after {
+            width: 0;
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            z-index: 11;
+            height: 100%;
+            -webkit-transition: width 0.4s;
+            transition: width 0.4s;
+            border-bottom: 2px solid $purple;
+        }
+
+        &:hover:after {
+            width: 100%;
+            -webkit-transition: width 0.4s;
+            transition: width 0.4s;
+        }
+    }
+}

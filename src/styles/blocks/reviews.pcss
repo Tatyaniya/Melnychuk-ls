@@ -1,0 +1,133 @@
+.reviews {
+    padding-top: 138px;
+    padding-bottom: 198px;
+    background: url('~images/bg/reviews-bg.jpg') center center / cover no-repeat;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 78px;
+    }
+
+    &__title {
+        margin-right: 116px;
+    }
+
+    &__buttons {
+        display: flex;
+    }
+
+    &__btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid $text-color;
+        position: relative;
+        border-radius: 50%;
+        margin-right: 28px;
+        transition: all .4s ease;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &:hover {
+            border: 2px solid rgba($text-color, .5);
+
+            &:before {
+                opacity: 0.5;
+            }
+        }
+
+        &:before {
+            content: "";
+            width: 10px;
+            height: 17px;
+            display: block;
+            background: svg-load('arrow.svg', fill=$text-color) center center / contain no-repeat;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all .4s ease;
+        }
+        &_prev {
+            &:before {
+                transform: translate(-50%, -50%) rotate(-180deg);
+            }
+        }
+    }
+
+    &__slider {
+        overflow: hidden;
+        padding-right: 32%;
+
+        &-items {
+            display: flex;
+            will-change: transform;
+            transition: transform .3s;
+        }
+
+        &-item {
+            flex-shrink: 0;
+            padding-right: 30px;
+            width: 50%;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.quote {
+    padding-left: 18%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 225px;
+
+    &:before {
+        content: "";
+        display: block;
+        width: 15%;
+        height: 33%;
+        background: svg-load('quote.svg', fill=#303133) center center / contain no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &__text {
+        width: 346px;
+        font-weight: 600;
+        line-height: 30px;
+        color: rgba($text-color, .6);
+    }
+
+    &__author {
+        display: flex;
+        align-items: center;
+        margin-top: auto;
+    }
+
+    &__avatar {
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 30px;
+    }
+
+    &__name {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 13px;
+    }
+
+    &__occ {
+        font-weight: 600;
+        color: rgba($text-color, .5);
+    }
+}

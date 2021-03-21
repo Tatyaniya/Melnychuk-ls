@@ -1,0 +1,84 @@
+.skills {
+    background: url('~images/bg/skills-bg.jpg') center center / cover no-repeat;
+    padding: 145px 0;
+    position: relative;
+
+    &__content {
+        padding-left: 500px;
+    }
+
+    &__title {
+        margin-bottom: 55px;
+    }
+
+    &:before {
+        content: "";
+        width: 662px;
+        height: 983px;
+        position: absolute;
+        left: 0;
+        bottom: -93px;
+        background: url('~images/content/arms.png') center center / cover no-repeat;
+        z-index: 10;
+    }
+
+    &__text {
+        color: rgba($text-color, .8);
+        margin-bottom: 70px;
+    }
+
+    &__widget--section-skill {
+        padding-left: 130px;
+    }
+
+    &__item {
+        margin-bottom: 45px;
+    }
+}
+
+.skills-row {
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__title {
+        margin-bottom: 30px;
+        font-size: 24px;
+        font-weight: 700;
+    }
+}
+
+.skill {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin-right: 40px;
+
+    &__circle {
+        fill: transparent;
+
+        &_under {
+            stroke: rgba(233, 233, 233, 0.1);
+            stroke-width: 3px;
+        }
+
+        &_above {
+            stroke-width: 8px;
+            stroke-dasharray: 251;
+            stroke-dashoffset: 120;
+        }
+
+        &-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba($text-color, .5);
+            font-size: 18px;
+            font-weight: 700;
+            padding: 14px;
+        }
+    }
+}

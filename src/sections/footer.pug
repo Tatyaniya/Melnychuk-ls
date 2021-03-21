@@ -1,0 +1,45 @@
+footer.footer 
+    .container
+        .footer__content 
+            .footer__left 
+                .footer__copy ©&nbsp;2020
+                .footer__data 
+                    .footer__name Владимир #[br]Астахов
+                    .footer__desc Личный сайт #[br]веб-разработчика
+            .footer__middle
+                .footer__menu 
+                    nav.menu
+                        ul.menu__list
+                            -
+                                const menuLinks = {
+                                    about: "Обо мне", 
+                                    skills: "Навыки", 
+                                    works: "Работы", 
+                                    reviews: "Отзывы"
+                                };
+
+                            each value, key in menuLinks
+                                li.menu__item
+                                    a(href=`#${key}`).menu__link #{value}
+                .footer__text 
+                    p Этот сайт я сделал в рамках обучения в #[br]Школе онлайн образования Loftschool
+                .footer__socials
+                    ul.socials 
+                        -
+                            const socialLinks = {
+                                insta: "https://www.instagram.com/", 
+                                vk: "https://www.facebook.com/", 
+                                github: "https://github.com/", 
+                                envelope: "mailto:mail@mail.com"
+                            };
+                        each value, key in socialLinks
+                            li.socials__item 
+                                a(href=`${value}`).socials__link&attributes({'target': '_blank'})
+                                    - var icon = require(`images/icons/${key}.svg`).default;
+                                    svg(class="socials__icon" viewBox=icon.viewBox preserveAspectRatio="none")
+                                        use(xlink:href=`sprite.svg#${icon.id.replace('-usage', '')}`)  
+                                    //+icon(key, 'socials__icon')                                
+            .footer__right
+                .footer__quote 
+                    .footer__quote-text Всегда пишите код так, будто сопровождать его будет склонный к насилию психопат, который знает где вы живете
+                    .footer__quote__author Martin Golding

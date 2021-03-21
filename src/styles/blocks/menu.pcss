@@ -21,4 +21,25 @@
 .menu__link {
     text-decoration: none;
     white-space: nowrap;
+    position: relative;
+
+    &:after {
+        width: 0;
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        z-index: 11;
+        height: 100%;
+        -webkit-transition: width 0.4s;
+        transition: width 0.4s;
+        border-bottom: 1px solid $text-color;
+    }
+
+    &:hover:after {
+        width: 100%;
+        -webkit-transition: width 0.4s;
+        transition: width 0.4s;
+    }
+ 
 }

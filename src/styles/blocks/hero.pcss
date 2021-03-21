@@ -25,7 +25,7 @@
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        padding-bottom: 5%;
+        padding-bottom: 3%;
     }
 }
 
@@ -62,11 +62,34 @@
 }
 
 .scroll-down {
-    background: url('');
+    display: flex;
 
     &__link {
         font-size: 18px;
         font-weight: 600;
         text-decoration: none;
+        transition: all .4s ease;
+
+        & span {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        &:hover {
+            color: rgba($text-color, .5);
+        }
+    }
+
+    &__arrow {
+        width: 14px;
+        height: 14px;
+        fill: #fff;
+        transition: all .4s ease;
     }
 }
+
+.scroll-down__link:hover .scroll-down__arrow {
+    fill: rgba($text-color, .5);
+    transform: translateY(5px);
+}
+

@@ -1,0 +1,29 @@
+section.skills#skills
+    .container.skills__container
+        .skills__content 
+            h2.skills__title.section-title Чем я могу быть полезен вам
+            p.skills__text 
+                | Этот сайт я сделал в рамках обучения в Школе онлайн образования #[br]LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите,#[br] как тут всё классно и красиво!
+            .skills__widget.skills__widget--section-skill
+                -
+                    const skillsCats = [
+                        ["Frontend", ["HTML5", "CSS3", "Javascript", "Vue.js"]],
+                        ["Workflow", ["GIT", "Terminal", "Gulp", "Webpack"]]
+                    ];
+
+                ul.skills__list
+                    each cat in skillsCats
+                        li.skills__item
+                            .skills-row
+                                .skills-row__title #{cat[0]}
+                                ul.skills-row__list
+                                    each skill in cat[1]
+                                        li.skills-row__item
+                                            .skill
+                                                svg(viewBox="0 0 100 100").skill__circle-shape
+                                                    circle(cx="50" cy="50" r="40").skill__circle.skill__circle_under
+                                                    circle(cx="50" cy="50" r="40" stroke="url(#gradient)" transform='rotate(180 50 50)').skill__circle.skill__circle_above
+                                                    linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0")
+                                                        stop(offset="0%" stop-color="#D0731B")
+                                                        stop(offset="100%" stop-color="#DC9322")
+                                                .skill__circle-text #{skill}
