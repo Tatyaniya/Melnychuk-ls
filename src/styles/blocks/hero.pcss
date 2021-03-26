@@ -32,6 +32,10 @@
 .userinfo {
     display: flex;
 
+    @include desktopHd {
+        justify-content: center;
+    }
+
     @include tablets {
         display: flex;
         flex-direction: column;

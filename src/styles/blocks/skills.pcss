@@ -5,6 +5,10 @@
 
     &__content {
         padding-left: 500px;
+
+        @include desktopHd {
+            padding-left: 210px;
+        }
     }
 
     &__title {
@@ -20,6 +24,13 @@
         bottom: -93px;
         background: url('~images/content/arms.png') center center / cover no-repeat;
         z-index: 10;
+
+        @include desktopHd {
+            width: 490px;
+            height: 728px;
+            left: -85px;
+            bottom: -86px;
+        }
     }
 
     &__text {
@@ -43,6 +54,10 @@
         flex-wrap: wrap;
     }
 
+    &__item:not(:last-child) {
+        margin-right: 40px;
+    }
+
     &__title {
         margin-bottom: 30px;
         font-size: 24px;
@@ -54,7 +69,6 @@
     position: relative;
     width: 160px;
     height: 160px;
-    margin-right: 40px;
 
     &__circle {
         fill: transparent;

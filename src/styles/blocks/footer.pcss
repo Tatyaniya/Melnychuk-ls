@@ -8,6 +8,10 @@
 
     &__left {
         display: flex;
+
+        @include desktopHd {
+            flex-direction: column;
+        }
     }
 
     &__copy {
@@ -16,6 +20,10 @@
         line-height: 1;
         color: rgba($text-color, .3);
         margin-right: 50px;
+
+        @include desktopHd {
+            margin-bottom: 24px;
+        }
     }
 
     &__name {
