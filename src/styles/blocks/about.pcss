@@ -1,4 +1,9 @@
 .about {
+
+    @include desktop {
+        background: url('~images/bg/about-bg.jpg') center 5px / cover no-repeat;
+    }
+    
     &__container {
         display: flex;
         justify-content: space-between;
@@ -7,14 +12,29 @@
         @include desktopHd {
             padding: 170px 0 200px;
         }
+
+        @include desktop {
+            padding-top: 100px;
+            padding-bottom: 80px;
+        }
     }
 
     &__user {
         width: 40%;
+
+        @include desktop {
+            margin-right: 75px;
+        }
     }
 
     &__content {
         flex: 1;
+
+        & br {
+            @include desktop {
+                display: none;
+            }
+        }
     }
 
     &__subtitle {
@@ -24,10 +44,7 @@
     }
 
     &__title {
-        font-weight: 700;
-        font-size: 36px;
         margin-bottom: 30px;
-        color: $text-color;
     }
 
     &__text {

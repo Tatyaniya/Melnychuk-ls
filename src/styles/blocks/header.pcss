@@ -4,12 +4,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @include desktop {
+        justify-content: flex-end;
+    }
+}
+
+.logo {
+    @include desktop {
+        margin-right: auto;
+    }
 }
 
 .header__menu {
     width: 55%;
 
-    @include tablets {
+    @include desktop {
         display: none;
     }
 }
@@ -18,4 +28,20 @@
     @include phones {
         display: none;
     }
+}
+
+.hamburger {
+    width: 30px;
+    height: 26px;
+    display: none;
+
+    @include desktop {
+        display: block;
+        margin-left: 80px;
+    }
+
+    & svg {
+        fill: #fff;
+    }
+    
 }

@@ -9,6 +9,10 @@
         padding-bottom: 115px;
     }
 
+    @include desktop {
+        padding-top: 120px;
+    }
+
     &__title {
         color: $text-dark;
         margin-bottom: 80px;
@@ -17,25 +21,32 @@
     &__content {
         display: flex;
 
+        @include desktop {
+            flex-direction: column;
+        }
     }
 }
 
 .works-slider {
     position: relative;
     margin-right: 154px;
+    width: 975px;
+    height: 549px;
 
     @include desktopHd {
+        width: 634px;
+        height: 360px;
         margin-right: 130px;
     }
 
-    &__pic-wrap {
-        width: 975px;
-        height: 549px;
+    @include desktop {
+        margin-right: 0;
+        margin-bottom: 55px;
+    }
 
-        @include desktopHd {
-            width: 634px;
-            height: 360px;
-        }
+    &__pic-wrap {
+        width: 100%;
+        height: 100%;
 
         &:after {
             content: attr(data-slide);
@@ -50,6 +61,10 @@
             @include desktopHd {
                font-size: 300px;
                top: 50px;
+            }
+
+            @include desktop {
+               top: 88px;
             }
         }
     }
@@ -68,6 +83,10 @@
         right: 0;
         bottom: 64px;
         z-index: 4;
+
+        @include desktopHd {
+            bottom: 38px;
+        }
     }
 
     &__item {
@@ -120,14 +139,14 @@
             bottom: 114px;
 
             @include desktopHd {
-                bottom: 97px;
+                bottom: 71px;
             }
         }
         &_prev {
             bottom: 65px;
 
             @include desktopHd {
-                bottom: 62px;
+                bottom: 36px;
             }
 
             &:before {
@@ -141,6 +160,10 @@
     &__tags {
         display: flex;
         margin-bottom: 35px;
+
+        @include desktop {
+            justify-content: center;
+        }
     }
 
     &__item {
@@ -149,7 +172,10 @@
         background: #F3F6F9;
         border-radius: 40px;    
         padding: 14px 22px;
-        margin-right: 8px;
+
+        &:not(:last-child) {
+            margin-right: 8px;
+        }
     }
 
     &__subtitle {
@@ -157,6 +183,10 @@
         line-height: 41px;
         font-weight: 700;
         margin-bottom: 35px;
+
+        @include desktop {
+            text-align: center;
+        }
     }
 
     &__text {
@@ -165,5 +195,17 @@
         line-height: 30px;
         color: rgba($text-dark, .8);
         margin-bottom: 45px;
+
+        @include desktop {
+            width: 420px;
+            text-align: center;
+            margin: 0 auto 30px;
+        }
+
+        & br {
+            @include desktop {
+                display: none;;
+            }
+        }
     }
 }

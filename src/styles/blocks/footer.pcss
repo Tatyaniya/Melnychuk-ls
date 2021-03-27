@@ -4,6 +4,10 @@
     &__content {
         display: flex;
         justify-content: space-between;
+
+        @include desktop {
+            flex-wrap: wrap;
+        }
     }
 
     &__left {
@@ -11,6 +15,10 @@
 
         @include desktopHd {
             flex-direction: column;
+        }
+
+        @include desktop {
+            margin-bottom: 50px;
         }
     }
 
@@ -34,6 +42,12 @@
         text-transform: uppercase;
     }
 
+    &__middle {
+        @include desktop {
+            width: 430px;
+        }
+    }
+
     &__desc {
         line-height: 30px;
         color: rgba($text-color, .3);
@@ -41,17 +55,43 @@
 
     &__menu {
         margin-bottom: 48px;
+
+        @include desktop {
+            margin-bottom: 35px;
+        }
+    }
+
+    & .menu__list {
+        @include desktop {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    & .menu__item {
+        @include desktop {
+            margin-right: 0;
+        }
     }
 
     &__text {
         line-height: 30px;
         color: rgba($text-color, .6);
         margin-bottom: 40px;
+
+        @include desktop {
+            margin-bottom: 21px;
+        }
     }
 
     &__right {
         max-width: 430px;
         align-self: flex-end;
+
+        @include desktop {
+            margin-left: auto;
+        }
     }
 
     &__quote-text {
@@ -63,5 +103,6 @@
     &__quote__author {
         font-style: italic;
     }
-}
 
+
+}

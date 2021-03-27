@@ -2,6 +2,12 @@
     background: url('~images/bg/skills-bg.jpg') center center / cover no-repeat;
     padding: 145px 0;
     position: relative;
+    overflow: hidden;
+
+    @include desktop {
+        padding-top: 90px;
+        padding-bottom: 330px;
+    }
 
     &__content {
         padding-left: 500px;
@@ -9,10 +15,20 @@
         @include desktopHd {
             padding-left: 210px;
         }
+
+        @include desktop {
+            padding-left: 0;
+            text-align: center;
+        }
     }
 
     &__title {
         margin-bottom: 55px;
+
+        @include desktop {
+            width: 270px;
+            margin: 0 auto 30px;
+        }
     }
 
     &:before {
@@ -31,15 +47,32 @@
             left: -85px;
             bottom: -86px;
         }
+
+        @include desktop {
+            width: 400px;
+            background-size: contain;
+            left: 50%;
+            bottom: -180px;
+            transform: translate(-50%, 0) rotate(-90deg);
+        }
     }
 
     &__text {
         color: rgba($text-color, .8);
         margin-bottom: 70px;
+        line-height: 24px;
+
+        @include desktop {
+            margin-bottom: 50px;
+        }
     }
 
     &__widget--section-skill {
         padding-left: 130px;
+
+        @include desktop {
+            padding-left: 0;
+        }
     }
 
     &__item {
@@ -56,6 +89,10 @@
 
     &__item:not(:last-child) {
         margin-right: 40px;
+
+        @include desktop {
+            margin-right: 26px;
+        }
     }
 
     &__title {
