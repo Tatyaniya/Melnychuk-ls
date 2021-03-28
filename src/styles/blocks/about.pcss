@@ -17,6 +17,10 @@
             padding-top: 100px;
             padding-bottom: 80px;
         }
+
+        @include tablets {
+            flex-direction: column;
+        }
     }
 
     &__user {
@@ -24,6 +28,12 @@
 
         @include desktop {
             margin-right: 75px;
+        }
+
+        @include tablets {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 45px;
         }
     }
 
@@ -51,6 +61,10 @@
         color: rgba($text-color, .8);
         line-height: 30px;
         margin-bottom: 77px;
+
+        @include tablets {
+            margin-bottom: 55px;
+        }
     }
 
     &__ps {
@@ -68,6 +82,13 @@
             top: 0;
             left: -50px;
             background:  svg-load('ps.svg', fill=rgba($ps-color, .5)) center center no-repeat;
+
+            @include tablets {
+                width: 23px;
+                height: 23px;
+                top: 6px;
+                left: -27px;
+            }
         }
     }
 }

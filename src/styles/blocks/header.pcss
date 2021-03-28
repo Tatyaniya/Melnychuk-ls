@@ -8,25 +8,31 @@
     @include desktop {
         justify-content: flex-end;
     }
+
+    &__menu {
+        width: 55%;
+
+        @include desktop {
+            display: none;
+        }
+    }
+
+    &__social {
+        @include tablets {
+            display: none;
+        }
+    }
+
+    &__buttons {
+        @include phones {
+            display: none;
+        }
+    }
 }
 
 .logo {
     @include desktop {
         margin-right: auto;
-    }
-}
-
-.header__menu {
-    width: 55%;
-
-    @include desktop {
-        display: none;
-    }
-}
-
-.header__buttons {
-    @include phones {
-        display: none;
     }
 }
 

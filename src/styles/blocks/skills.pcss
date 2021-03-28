@@ -9,6 +9,11 @@
         padding-bottom: 330px;
     }
 
+    @include tablets {
+        padding-top: 60px;
+        padding-bottom: 210px;
+    }
+
     &__content {
         padding-left: 500px;
 
@@ -19,6 +24,10 @@
         @include desktop {
             padding-left: 0;
             text-align: center;
+        }
+
+        @include tablets {
+            text-align: left;
         }
     }
 
@@ -55,6 +64,11 @@
             bottom: -180px;
             transform: translate(-50%, 0) rotate(-90deg);
         }
+
+        @include tablets {
+           width: 260px;
+           bottom: -240px;
+        }
     }
 
     &__text {
@@ -85,6 +99,10 @@
     &__list {
         display: flex;
         flex-wrap: wrap;
+
+        @include tablets {
+            justify-content: space-evenly;
+        }
     }
 
     &__item:not(:last-child) {
@@ -93,12 +111,20 @@
         @include desktop {
             margin-right: 26px;
         }
+
+        @include tablets {
+            margin-right: 0;
+        }
     }
 
     &__title {
         margin-bottom: 30px;
         font-size: 24px;
         font-weight: 700;
+
+        @include tablets {
+            text-align: center;
+        }
     }
 }
 
@@ -106,6 +132,11 @@
     position: relative;
     width: 160px;
     height: 160px;
+
+    @include tablets {
+        width: 150px;
+        height: 150px;
+    }
 
     &__circle {
         fill: transparent;

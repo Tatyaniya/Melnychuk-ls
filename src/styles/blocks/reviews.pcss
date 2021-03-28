@@ -5,13 +5,22 @@
 
     @include desktop {
         padding-top: 120px;
-       padding-bottom: 145px;
+        padding-bottom: 145px;
+    }
+
+    @include tablets {
+        padding: 75px 0;
     }
 
     &__header {
         display: flex;
         align-items: center;
         margin-bottom: 78px;
+
+        @include tablets {
+            flex-direction: column;
+            margin-botton: 55px;
+        }
     }
 
     &__title {
@@ -19,6 +28,12 @@
 
         @include desktop {
             margin-right: 50px;
+        }
+
+        @include tablets {
+            font-size: 20px;
+            margin-bottom: 20px;
+            margin-right: 0;
         }
     }
 
@@ -90,6 +105,12 @@
             padding-right: 30px;
             width: 50%;
 
+            @include tablets {
+                width: 100%;
+                padding: 0 15px;
+                margin-right: 0;
+            }
+
             &:last-child {
                 margin-right: 0;
             }
@@ -105,6 +126,10 @@
     justify-content: space-between;
     min-height: 225px;
 
+    @include tablets {
+        padding-left: 0;
+    }
+
     &:before {
         content: "";
         display: block;
@@ -117,6 +142,10 @@
 
         @include desktop {
             width: 13%;
+        }
+
+        @include tablets {
+            display: none;
         }
     }
 
