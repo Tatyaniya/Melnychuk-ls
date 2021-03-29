@@ -39,16 +39,25 @@
     }
 
     &__name {
+        max-width: 140px;
         font-size: 18px;
         font-weight: 700;
         line-height: 30px;
         margin-bottom: 15px;
         text-transform: uppercase;
 
-        & br {
-            @include tablets {
-                display: none;
-            }
+        @include tablets {
+            min-width: 100%;
+        }
+    }
+
+    &__desc {
+        max-width: 140px;
+        line-height: 30px;
+        color: rgba($text-color, .3);
+
+        @include tablets {
+            min-width: 100%;
         }
     }
 
@@ -60,17 +69,6 @@
         @include tablets {
             width: 100%;
             margin-bottom: 30px;
-        }
-    }
-
-    &__desc {
-        line-height: 30px;
-        color: rgba($text-color, .3);
-
-        & br {
-            @include tablets {
-                display: none;
-            }
         }
     }
 
