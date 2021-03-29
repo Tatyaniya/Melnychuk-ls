@@ -44,12 +44,13 @@
     height: 549px;
 
     @include desktopHd {
-        width: 634px;
+        min-width: 634px;
         height: 360px;
         margin-right: 130px;
     }
 
     @include desktop {
+        width: 634px;
         margin-right: 0;
         margin-bottom: 55px;
     }
@@ -123,8 +124,8 @@
             height: 66px;
         }
 
-        &--active {
-            border: 3px solid #DC9322;
+        &.active {
+            border: 2px solid #DC9322;
         }
     }
 
@@ -195,6 +196,15 @@
     }
 }
 
+.works-slider__buttons .works-slider__btn {
+    background: $text-dark;
+
+    &:focus {
+        outline: none;
+        border: none;
+    }
+}
+
 .works-data {
     &__tags {
         display: flex;
@@ -248,12 +258,6 @@
         @include tablets {
             width: 100%;
             text-align: left;
-        }
-
-        & br {
-            @include desktop {
-                display: none;;
-            }
         }
     }
 }

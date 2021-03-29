@@ -1,40 +1,61 @@
 script(type="text/x-template")#works-container
-    .works-slider
-        display
-        thumbs 
-        btns
-    .works-data
-        tags 
-        info
+    .works__content
+        display(
+            :currentWork="currentWork"
+            :works="works"
+            @slide="slide"
+            :currentIndex="currentIndex"
+        )
+        info(
+            :currentWork="currentWork"
+        )
         
 script(type="text/x-template")#works-display
-    .works-slider__pic-wrap(data-slide="2")
-        .works-slider__pic
-            +image('works/1.jpg', 'works-slider__fullpic')
+    .works-slider
+        .works-slider__pic-wrap(:data-slide="currentIndex + 1")
+            .works-slider__pic
+                img(:src="currentWork.photo").works-slider__fullpic
+        thumbs(
+            :works="reversedWorks"
+            :currentWork="currentWork"
+        )
+        btns(
+            @slide="$emit('slide', $event)"
+        )
         
 script(type="text/x-template")#works-thumbs
     ul.works-slider__thumbs
-        - for (var i = 1; i < 5; i++)
-            li.works-slider__item
-                a(href="").works-slider__link
-                    +image(`works/${i}.jpg`, 'works-slider__img')
+        li.works-slider__item(
+            v-for="slide in works" :key="slide.id"
+            :class="{active: currentWork.id === slide.id}"
+            )
+            .works-slider__link
+                img(:src="slide.photo").works-slider__img
 
 script(type="text/x-template")#works-btns
     .works-slider__buttons
-        a(href="#").works-slider__btn.works-slider__btn_next
-        a(href="#").works-slider__btn.works-slider__btn_prev
+        button(
+            type="button"
+            @click="$emit('slide', 'next')"
+        ).works-slider__btn.works-slider__btn_next
+        button(
+            type="button"
+            @click="$emit('slide', 'prev')"
+        ).works-slider__btn.works-slider__btn_prev
 
 script(type="text/x-template")#works-info
-    .works-data__subtitle Сайт школы образования
-    .works-data__text
-        p Этот парень проходил обучение #[br]веб-разработке не где-то, а в LoftSchool! 2&nbsp;месяца только самых тяжелых испытаний и бессонных ночей!
-    .view-site
-        +icon('link', 'view-site__icon')
-        a(href="#").view-site__link&attributes({'target': '_blank'}) Посмотреть сайт
+    .works-data
+        tags(
+            :tags="tagsArray"
+        )
+        .works-data__subtitle {{currentWork.title}}
+        .works-data__text
+            p {{currentWork.desc}}
+        .view-site
+            +icon('link', 'view-site__icon')
+            a(href="currentWork.link").view-site__link&attributes({'target': '_blank'}) Посмотреть сайт
 
 script(type="text/x-template")#works-tags
     ul.works-data__tags
-        - var tags = ['HTML', 'CSS', 'JavaScript'];
-            each item in tags
-                li.works-data__item 
-                    span.tag #{item}
+        li.works-data__item(v-for="tag in tags")
+            span.tag {{tag}}
