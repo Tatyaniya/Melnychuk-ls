@@ -50,12 +50,21 @@
         border-radius: 50%;
         margin-right: 28px;
         transition: all .4s ease;
+        background: transparent;
 
         &:last-child {
             margin-right: 0;
         }
 
         &:hover {
+            border: 2px solid rgba($text-color, .5);
+
+            &:before {
+                opacity: 0.5;
+            }
+        }
+
+        &:disabled {
             border: 2px solid rgba($text-color, .5);
 
             &:before {
@@ -95,13 +104,11 @@
         }
 
         &-items {
-            display: flex;
             will-change: transform;
             transition: transform .3s;
         }
 
         &-item {
-            flex-shrink: 0;
             padding-right: 30px;
             width: 50%;
 
