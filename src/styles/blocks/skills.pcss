@@ -2,13 +2,42 @@
     background: url('~images/bg/skills-bg.jpg') center center / cover no-repeat;
     padding: 145px 0;
     position: relative;
+    
+    @include desktop {
+        padding-top: 90px;
+        padding-bottom: 330px;
+        //overflow: hidden;
+    }
+
+    @include tablets {
+        padding-top: 60px;
+        padding-bottom: 210px;
+    }
 
     &__content {
         padding-left: 500px;
+
+        @include desktopHd {
+            padding-left: 210px;
+        }
+
+        @include desktop {
+            padding-left: 0;
+            text-align: center;
+        }
+
+        @include tablets {
+            text-align: left;
+        }
     }
 
     &__title {
         margin-bottom: 55px;
+
+        @include desktop {
+            width: 270px;
+            margin: 0 auto 30px;
+        }
     }
 
     &:before {
@@ -20,15 +49,44 @@
         bottom: -93px;
         background: url('~images/content/arms.png') center center / cover no-repeat;
         z-index: 10;
+
+        @include desktopHd {
+            width: 490px;
+            height: 728px;
+            left: -85px;
+            bottom: -86px;
+        }
+
+        @include desktop {
+            width: 400px;
+            background-size: contain;
+            left: 50%;
+            bottom: -163px;
+            transform: translate(-50%, 0) rotate(-90deg);
+        }
+
+        @include tablets {
+           width: 260px;
+           bottom: -233px;
+        }
     }
 
     &__text {
         color: rgba($text-color, .8);
         margin-bottom: 70px;
+        line-height: 24px;
+
+        @include desktop {
+            margin-bottom: 50px;
+        }
     }
 
     &__widget--section-skill {
         padding-left: 130px;
+
+        @include desktop {
+            padding-left: 0;
+        }
     }
 
     &__item {
@@ -41,12 +99,32 @@
     &__list {
         display: flex;
         flex-wrap: wrap;
+
+        @include tablets {
+            justify-content: space-evenly;
+        }
+    }
+
+    &__item:not(:last-child) {
+        margin-right: 40px;
+
+        @include desktop {
+            margin-right: 26px;
+        }
+
+        @include tablets {
+            margin-right: 0;
+        }
     }
 
     &__title {
         margin-bottom: 30px;
         font-size: 24px;
         font-weight: 700;
+
+        @include tablets {
+            text-align: center;
+        }
     }
 }
 
@@ -54,7 +132,11 @@
     position: relative;
     width: 160px;
     height: 160px;
-    margin-right: 40px;
+
+    @include tablets {
+        width: 150px;
+        height: 150px;
+    }
 
     &__circle {
         fill: transparent;

@@ -1,36 +1,4 @@
 .reviews#reviews
     .container
-        .reviews__header
-            h2.reviews__title.section-title Что обо мне говорят
-            .reviews__buttons
-                .reviews__btn.reviews__btn_prev
-                .reviews__btn.reviews__btn_next
-        .reviews__slider
-            -
-                const reviews = [
-                    {
-                        quote: "Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5&nbsp;месяца только самых тяжелых испытаний и бессонных ночей!",
-                        author: "Ковальчук Дмитрий",
-                        position:"Основатель Loftschool",
-                        avatar: "1"
-                    },
-                    {
-                        quote: "Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах",
-                        author: "Владимир Сабанцев",
-                        position: "Преподаватель",
-                        avatar: "2"
-                    }
-                ];
-
-            ul.reviews__slider-items
-                each review in reviews
-                    li.reviews__slider-item
-                        .quote
-                            .quote__text
-                                p= review.quote
-                            .quote__author
-                                .quote__avatar
-                                    +image(`content/review-${review.avatar}.jpg`, 'quote__avatar-pic')
-                                .quote__info
-                                    .quote__name= review.author
-                                    .quote__occ= review.position
+        #reviews-template
+        

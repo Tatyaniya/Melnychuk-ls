@@ -32,10 +32,18 @@
 .userinfo {
     display: flex;
 
-    @include tablets {
+    @include desktopHd {
+        justify-content: center;
+    }
+
+    @include desktop {
         display: flex;
         flex-direction: column;
         text-align: center;
+    }
+
+    @include tablets {
+        padding-top: 30%;
     }
 
     &__title {
@@ -46,6 +54,12 @@
         text-align: right;
         padding-top: 10px;
         margin-right: 5%;
+
+        @include desktop {
+            text-align: center;
+            margin-bottom: 24px;
+            margin-right: 0;
+        }
     }
 
     &__name {
@@ -55,6 +69,11 @@
         line-height: 60px;
         line-height: 1;
 
+        @include desktop {
+            width: 300px;
+            font-size: 48px;
+        }
+
         @include phones {
             font-size: 36px;
         }
@@ -63,6 +82,10 @@
 
 .scroll-down {
     display: flex;
+
+    @include desktop {
+        display: none;
+    }
 
     &__link {
         font-size: 18px;

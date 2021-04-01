@@ -1,16 +1,50 @@
 .about {
+
+    @include desktop {
+        background: url('~images/bg/about-bg.jpg') center 5px / cover no-repeat;
+    }
+    
     &__container {
         display: flex;
         justify-content: space-between;
         padding: 170px 12% 275px;
+
+        @include desktopHd {
+            padding: 170px 0 200px;
+        }
+
+        @include desktop {
+            padding-top: 100px;
+            padding-bottom: 80px;
+        }
+
+        @include tablets {
+            flex-direction: column;
+        }
     }
 
     &__user {
         width: 40%;
+
+        @include desktop {
+            margin-right: 75px;
+        }
+
+        @include tablets {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 45px;
+        }
     }
 
     &__content {
         flex: 1;
+
+        & br {
+            @include desktop {
+                display: none;
+            }
+        }
     }
 
     &__subtitle {
@@ -20,16 +54,17 @@
     }
 
     &__title {
-        font-weight: 700;
-        font-size: 36px;
         margin-bottom: 30px;
-        color: $text-color;
     }
 
     &__text {
         color: rgba($text-color, .8);
         line-height: 30px;
         margin-bottom: 77px;
+
+        @include tablets {
+            margin-bottom: 55px;
+        }
     }
 
     &__ps {
@@ -47,6 +82,13 @@
             top: 0;
             left: -50px;
             background:  svg-load('ps.svg', fill=rgba($ps-color, .5)) center center no-repeat;
+
+            @include tablets {
+                width: 23px;
+                height: 23px;
+                top: 6px;
+                left: -27px;
+            }
         }
     }
 }

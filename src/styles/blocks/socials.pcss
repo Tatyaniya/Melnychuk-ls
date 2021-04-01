@@ -21,6 +21,19 @@
     }
 }
 
+.header .socials {
+    @include desktop {
+        justify-content: flex-end;
+    }
+}
+
+.hamburger__socials {
+
+    & .socials__link svg {
+        fill: $menu-hamburger;
+    }
+}
+
 .footer .socials__link {
     width: 50px;
     height: 50px;
@@ -37,5 +50,11 @@
 
     &:hover .socials__icon {
         fill: rgba($text-color, .6);
+    }
+}
+
+.footer .socials__item {
+    @include desktopHd {
+        margin-right: 21px;
     }
 }

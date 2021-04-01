@@ -4,10 +4,26 @@
     &__content {
         display: flex;
         justify-content: space-between;
+
+        @include desktop {
+            flex-wrap: wrap;
+        }
     }
 
     &__left {
         display: flex;
+
+        @include desktopHd {
+            flex-direction: column;
+        }
+
+        @include desktop {
+            margin-bottom: 50px;
+        }
+
+        @include tablets {
+            width: 100%;
+        }
     }
 
     &__copy {
@@ -16,34 +32,98 @@
         line-height: 1;
         color: rgba($text-color, .3);
         margin-right: 50px;
+
+        @include desktopHd {
+            margin-bottom: 24px;
+        }
     }
 
     &__name {
+        max-width: 140px;
         font-size: 18px;
         font-weight: 700;
         line-height: 30px;
         margin-bottom: 15px;
         text-transform: uppercase;
+
+        @include tablets {
+            min-width: 100%;
+        }
     }
 
     &__desc {
+        max-width: 140px;
         line-height: 30px;
         color: rgba($text-color, .3);
+
+        @include tablets {
+            min-width: 100%;
+        }
+    }
+
+    &__middle {
+        @include desktop {
+            width: 430px;
+        }
+
+        @include tablets {
+            width: 100%;
+            margin-bottom: 30px;
+        }
     }
 
     &__menu {
         margin-bottom: 48px;
+
+        @include desktop {
+            margin-bottom: 35px;
+        }
+
+        @include tablets {
+            margin-bottom: 25px;
+        }
+    }
+
+    & .menu__list {
+        @include desktop {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @include tablets {
+            flex-wrap: wrap;
+        }
+    }
+
+    & .menu__item {
+        @include desktop {
+            margin-right: 0;
+        }
+
+        @include tablets {
+            width: 50%;
+            margin-bottom: 22px;
+        }
     }
 
     &__text {
         line-height: 30px;
         color: rgba($text-color, .6);
         margin-bottom: 40px;
+
+        @include desktop {
+            margin-bottom: 21px;
+        }
     }
 
     &__right {
         max-width: 430px;
         align-self: flex-end;
+
+        @include desktop {
+            margin-left: auto;
+        }
     }
 
     &__quote-text {
@@ -56,4 +136,3 @@
         font-style: italic;
     }
 }
-

@@ -3,14 +3,38 @@
     padding-bottom: 198px;
     background: url('~images/bg/reviews-bg.jpg') center center / cover no-repeat;
 
+    @include desktop {
+        padding-top: 120px;
+        padding-bottom: 145px;
+    }
+
+    @include tablets {
+        padding: 75px 0;
+    }
+
     &__header {
         display: flex;
         align-items: center;
         margin-bottom: 78px;
+
+        @include tablets {
+            flex-direction: column;
+            margin-botton: 55px;
+        }
     }
 
     &__title {
         margin-right: 116px;
+
+        @include desktop {
+            margin-right: 50px;
+        }
+
+        @include tablets {
+            font-size: 20px;
+            margin-bottom: 20px;
+            margin-right: 0;
+        }
     }
 
     &__buttons {
@@ -26,12 +50,21 @@
         border-radius: 50%;
         margin-right: 28px;
         transition: all .4s ease;
+        background: transparent;
 
         &:last-child {
             margin-right: 0;
         }
 
         &:hover {
+            border: 2px solid rgba($text-color, .5);
+
+            &:before {
+                opacity: 0.5;
+            }
+        }
+
+        &:disabled {
             border: 2px solid rgba($text-color, .5);
 
             &:before {
@@ -62,16 +95,28 @@
         overflow: hidden;
         padding-right: 32%;
 
+        @include desktopHd {
+            padding-right: 9%;
+        }
+
+        @include desktop {
+            padding-right: 0;
+        }
+
         &-items {
-            display: flex;
             will-change: transform;
             transition: transform .3s;
         }
 
         &-item {
-            flex-shrink: 0;
             padding-right: 30px;
             width: 50%;
+
+            @include tablets {
+                width: 100%;
+                padding: 0 15px;
+                margin-right: 0;
+            }
 
             &:last-child {
                 margin-right: 0;
@@ -88,6 +133,10 @@
     justify-content: space-between;
     min-height: 225px;
 
+    @include tablets {
+        padding-left: 0;
+    }
+
     &:before {
         content: "";
         display: block;
@@ -97,6 +146,14 @@
         position: absolute;
         top: 0;
         left: 0;
+
+        @include desktop {
+            width: 13%;
+        }
+
+        @include tablets {
+            display: none;
+        }
     }
 
     &__text {
@@ -104,6 +161,11 @@
         font-weight: 600;
         line-height: 30px;
         color: rgba($text-color, .6);
+
+        @include desktop {
+            width: 300px;
+            font-size: 14px;
+        }
     }
 
     &__author {
@@ -118,16 +180,29 @@
         border-radius: 50%;
         overflow: hidden;
         margin-right: 30px;
+        flex-shrink: 0;
+
+        @include desktop {
+            margin-right: 20px;
+        }
     }
 
     &__name {
         font-size: 18px;
         font-weight: 700;
         margin-bottom: 13px;
+
+        @include desktop {
+            font-size: 16px;
+        }
     }
 
     &__occ {
         font-weight: 600;
         color: rgba($text-color, .5);
+
+        @include desktop {
+            font-size: 14px;
+        }
     }
 }

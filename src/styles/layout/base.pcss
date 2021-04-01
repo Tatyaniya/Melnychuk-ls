@@ -12,13 +12,17 @@ html {
 }
 
 body {
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 1.42;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: $text-color;
-  background-color: $bg-body;
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.42;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: $text-color;
+    background-color: $bg-body;
+
+    @include desktop {
+        font-size: 14px;
+    }
 }
 
 .wrapper {
@@ -28,24 +32,38 @@ body {
 }
 
 .container {
-  margin: 0 auto;
-  /* max-width: 1480px;
-  width: 95%; */
-  width: 1490px;
+    margin: 0 auto;
+    max-width: 1490px;
 
-  @include phones {
-    width: 85%;
-  }
+    @include desktopHd {
+        max-width: 1100px;
+    }
+
+    @include desktop {
+        max-width: 720px;
+    }
+
+    @include tablets {
+        max-width: 480px;
+    }
+
+    @include tablets {
+        max-width: 340px;
+    }
 }
 
 .fullscreen-section {
-  height: 100vh;
-  min-height: 650px;
+    height: 100vh;
+    min-height: 650px;
 }
 
 button {
   border: 0;
   cursor: pointer;
+}
+
+button:focus {
+  outline: 0;
 }
 
 * {

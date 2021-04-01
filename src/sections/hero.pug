@@ -31,11 +31,45 @@ section.fullscreen-section.hero
                         li.socials__item
                             a(href=`${value}`).socials__link&attributes({'target': '_blank'})
                                 +icon(key, 'socials__icon')
+            .hamburger 
+                +icon('hamburger', 'hamburger__icon')
+            .menu-hamburger 
+                .menu-hamburger__wrapper
+                    button.ham-close-btn
+                        +icon('close', 'ham-close-icon')
+                    nav.menu
+                        ul.menu__list.menu__list--ham
+                            -
+                                const menuHam = {
+                                    main: "Главная",
+                                    about: "Обо мне", 
+                                    skills: "Навыки", 
+                                    works: "Работы", 
+                                    reviews: "Отзывы"
+                                };
+
+                            each value, key in menuHam
+                                li.menu__item.menu__item--ham
+                                    a(href=`#${key}`).menu__link.menu__link--ham #{value}
+            
+                    ul.socials.hamburger__socials
+                        -
+                            const socialHam = {
+                                insta: "https://www.instagram.com/", 
+                                vk: "https://www.facebook.com/", 
+                                github: "https://github.com/", 
+                                envelope: "mailto:mail@mail.com"
+                            };
+
+                        each value, key in socialHam
+                            li.socials__item
+                                a(href=`${value}`).socials__link&attributes({'target': '_blank'})
+                                    +icon(key, 'socials__icon')
                    
 
         .hero__content
             h1.userinfo
-                .userinfo__title Личный сайт #[br] веб разработчика
+                .userinfo__title Личный сайт #[br] веб&nbsp;разработчика
                 .userinfo__name Владимир Астаханов
         .hero__downbutton
             .scroll-down
