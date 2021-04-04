@@ -1,7 +1,6 @@
 <template lang="pug">
     card(slim)
         editLine(slot="title" v-model="title")
-       
 </template>
 
 <script>
@@ -15,10 +14,10 @@ export default {
     },
     data() {
         return {
-            title: "Title"
+            title: ""
         }
     }
-};
+}
 
 </script>
 
