@@ -8,6 +8,7 @@
                 .header
                     .title Блок "Обо мне"
                     iconed-btn(type="iconed" title="Добавить группу")
+                //category
 </template>
 
 <script>
@@ -15,6 +16,7 @@ import headline from "./components/headline";
 import user from "./components/user";
 import navigation from "./components/navigation";
 import button from "./components/button";
+//import category from "./components/category";
 
 export default {
     components: {
@@ -22,6 +24,7 @@ export default {
         user,
         navigation,
         iconedBtn: button,
+        //category
     }
 };
 
