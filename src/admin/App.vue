@@ -7,14 +7,20 @@
             .container
                 .header
                     .title Блок "Обо мне"
-                    iconed-btn(type="iconed" title="Добавить группу")
+                    iconed-btn(
+                        type="iconed" 
+                        title="Добавить группу" 
+                        @click="emptyCatIsShow = true"
+                        v-if="emptyCatIsShow === false"
+                    )
                 ul.skills
-                    li.item
-                        category(empty)
-                    li.item
-                        category
-                    li.item
-                        category
+                    li.item(v-if="emptyCatIsShow")
+                        category(empty @remove="emptyCatIsShow = false")
+                    li.item(v-for="category in categories" :key="category.id")
+                        category(
+                            :title="category.category"
+                            :skills="category.skills"
+                        )
 </template>
 
 <script>
@@ -31,6 +37,15 @@ export default {
         navigation,
         iconedBtn: button,
         category
+    },
+    data() {
+        return {
+            categories: [],
+            emptyCatIsShow: false
+        }
+    },
+    created() {
+        this.categories = require("./data/categories.json");
     }
 };
 

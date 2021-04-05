@@ -1,10 +1,19 @@
 <template lang="pug">
     card(slim)
-        editLine(slot="title" v-model="title" :editModeByDefault="empty")
+        editLine(
+            slot="title" 
+            v-model="categoryTitle" 
+            :editModeByDefault="empty"
+            @remove="$emit('remove', $event)"
+            )
         template(slot="content")
-            ul.skills
-                li.item(v-for="skill in skills" :key="skill.id" v-if="empty === false")
-                    skill(:skill="skill")
+            ul.skills(v-if="empty === false")
+                li.item(v-for="skill in skills" :key="skill.id")
+                    skill(
+                        :skill="skill"
+                        @remove="$emit('removeSkill', $event)"
+                        @approve="$emit('editSkill', $event)"
+                        )
             .bottom-line
                 skillAddLine(:blocked="empty")
 </template>
@@ -15,12 +24,6 @@ import editLine from "../editLine";
 import skill from "../skill";
 import skillAddLine from "../skillAddLine";
 
-const skills = [
-    {id: 0, title: "HTML", percent: 80},
-    {id: 1, title: "CSS", percent: 60},
-    {id: 2, title: "JavaScript", percent: 40},
-]
-
 export default {
     components: {
         card,
@@ -29,16 +32,22 @@ export default {
         skillAddLine
     },
     props: {
-        empty: Boolean
+        empty: Boolean,
+        title: {
+            type: String,
+            default: ""
+        },
+        skills: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {
-            title: "",
-            skills
+            categoryTitle: this.title,
         }
     }
 }
-
 </script>
 
 <style lang="postcss">

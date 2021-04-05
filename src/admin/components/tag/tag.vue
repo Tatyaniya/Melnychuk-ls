@@ -1,15 +1,27 @@
-<template>
-  <div class="tag">{{title}}</div>
+<template lang="pug">
+    .tag(:class="{interactive: interactive}")
+        span {{title}}
+        button.remove(
+            v-on="$listeners"
+            v-if="interactive" 
+            type="button"
+        )
 </template>
 
 <script>
+import icon from "../icon";
+
 export default {
-  props: {
-    title: {
-      type: String,
-      default: ""
+    props: {
+        title: {
+            type: String,
+            default: ""
+        },
+        interactive: Boolean
+    },
+    components: {
+        icon
     }
-  }
 }
 </script>
 
