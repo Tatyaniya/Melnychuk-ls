@@ -3,7 +3,9 @@ import { action } from "@storybook/addon-actions";
 
 export default {
     title: "category",
-    components: {category}
+    components: {
+        category
+    }
 }
 
 export const defaultView = () => ({
@@ -11,4 +13,4 @@ export const defaultView = () => ({
     template: `
       <category /> 
     `
-  });
+});
