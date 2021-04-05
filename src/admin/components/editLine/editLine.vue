@@ -32,37 +32,37 @@
 
 <script>
 export default {
-  props: {
-    value: {
-      type: String,
-      default: ""
+    props: {
+        value: {
+            type: String,
+            default: ""
+        },
+        errorText: {
+            type: String,
+            default: ""
+        },
+            blocked: Boolean,
+            editModeByDefault: Boolean
     },
-    errorText: {
-      type: String,
-      default: ""
+    data() {
+        return {
+            editmode: this.editModeByDefault,
+            title: this.value
+        };
     },
-    blocked: Boolean,
-    editModeByDefault: Boolean
-  },
-  data() {
-    return {
-      editmode: this.editModeByDefault,
-      title: this.value
-    };
-  },
-  methods: {
-    onApprove() {
-      if (this.title.trim() === this.value.trim()) {
-        this.editmode = false;
-      } else {
-        this.$emit("approve", this.value);
-      }
+    methods: {
+        onApprove() {
+        if (this.title.trim() === this.value.trim()) {
+            this.editmode = false;
+        } else {
+            this.$emit("approve", this.value);
+        }
+        }
+    },
+    components: {
+        icon: () => import("components/icon"),
+        appInput: () => import("components/input")
     }
-  },
-  components: {
-    icon: () => import("components/icon"),
-    appInput: () => import("components/input")
-  }
 };
 </script>
 
