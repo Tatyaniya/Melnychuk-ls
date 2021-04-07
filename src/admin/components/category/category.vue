@@ -5,7 +5,6 @@
             v-model="categoryTitle" 
             :editModeByDefault="empty"
             @remove="$emit('remove', $event)"
-            errorMessage=""
             )
         template(slot="content")
             ul.skills(v-if="empty === false")
@@ -27,12 +26,6 @@ import skillAddLine from "../skillAddLine";
 import { Validator } from "simple-vue-validator";
 
 export default {
-    mixins: [require('simple-vue-validator').mixin],
-    validators: {
-        categoryTitle: (value) => {
-            return Validator.value(value).required('Заполните поле');
-        }
-    },
     components: {
         card,
         editLine,

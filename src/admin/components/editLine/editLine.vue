@@ -12,6 +12,7 @@
           placeholder="Название новой группы"
           :value="value"
           :errorText="errorText"
+          v-model="categoryTitle"
           @input="$emit('input', $event)"
           @keydown.native.enter="onApprove"
           autofocus="autofocus"
@@ -31,7 +32,15 @@
 </template>
 
 <script>
+import {Validator} from 'simple-vue-validator';
+
 export default {
+    mixin: [require('simple-vue-validator').mixin],
+    validators: {
+        categoryTitle: (value) => {
+            return Validator.value(value).required('Заполните поле');
+        }
+    },
     props: {
         value: {
             type: String,
@@ -52,11 +61,20 @@ export default {
     },
     methods: {
         onApprove() {
-        if (this.title.trim() === this.value.trim()) {
-            this.editmode = false;
-        } else {
-            this.$emit("approve", this.value);
-        }
+            // this.$validate().then(success => {
+            //     if (!success) {
+            //         return;
+            //     } else if (this.title.trim() === this.value.trim()) {
+            //         this.editmode = false;
+            //     } else {
+            //         this.$emit("approve", this.value);
+            //     }
+            // })
+            if (this.title.trim() === this.value.trim()) {
+                this.editmode = false;
+            } else {
+                this.$emit("approve", this.value);
+            }            
         }
     },
     components: {
