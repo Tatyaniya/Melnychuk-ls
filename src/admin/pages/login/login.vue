@@ -6,6 +6,7 @@
                 .row
                     appInput(
                         title="Логин"
+                        type="text"
                         v-model="user.name"
                         icon="user"
                         :errorMessage="validation.firstError('user.name')"
@@ -16,6 +17,7 @@
                         v-model="user.password"
                         icon="key"
                         type="password"
+                        :errorMessage="validation.firstError('user.password')"
                     )
                 .button
                     appButton Отправить
@@ -48,9 +50,13 @@ export default {
     },
     methods: {
         handleSubmit() {
-            console.log(this.user.name, this.user.password);
-        }
-    }
+            this.$validate().then((isValid) => {
+                if (isValid === false) return;
+
+                console.log('request');
+            });
+        },
+    },
 }
 </script>
 
