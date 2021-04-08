@@ -1,26 +1,6 @@
 <template lang="pug">
     .app-container
-        headline(title="Панель администрирования")
-            user
-        navigation
-        .page-content
-            .container
-                .header
-                    .title Блок "Обо мне"
-                    iconed-btn(
-                        type="iconed" 
-                        title="Добавить группу" 
-                        @click="emptyCatIsShow = true"
-                        v-if="emptyCatIsShow === false"
-                    )
-                ul.skills
-                    li.item(v-if="emptyCatIsShow")
-                        category(empty @remove="emptyCatIsShow = false")
-                    li.item(v-for="category in categories" :key="category.id")
-                        category(
-                            :title="category.category"
-                            :skills="category.skills"
-                        )
+        router-view
 </template>
 
 <script>
