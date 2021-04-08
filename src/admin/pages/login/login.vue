@@ -8,6 +8,7 @@
                         title="Логин"
                         v-model="user.name"
                         icon="user"
+                        :errorMessage="validation.firstError('user.name')"
                     )
                 .row
                     appInput(
@@ -23,12 +24,32 @@
 <script>
 import appInput from "../../components/input";
 import appButton from "../../components/button";
+import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
 
 export default {
-    data: () => ({}),
+    mixins: [ValidatorMixin],
+    validators: {
+        "user.name": value => {
+            return Validator.value(value).required('Введите имя');
+        },
+        "user.password": value => {
+            return Validator.value(value).required('Введите пароль');
+        }
+    },
+    data: () => ({
+        user: {
+            name: "",
+            password: ""
+        }
+    }),
     components: {
         appInput,
         appButton
+    },
+    methods: {
+        handleSubmit() {
+            console.log(this.user.name, this.user.password);
+        }
     }
 }
 </script>

@@ -1,33 +1,25 @@
 <template lang="pug">
     .app-container
+        router-view(name="header")
         router-view
 </template>
 
 <script>
-import headline from "./components/headline";
-import user from "./components/user";
-import navigation from "./components/navigation";
-import button from "./components/button";
-import category from "./components/category";
+
 
 export default {
-    components: {
-        headline,
-        user,
-        navigation,
-        iconedBtn: button,
-        category
-    },
+    components: {},
+      
     data() {
         return {
-            categories: [],
-            emptyCatIsShow: false
+            // categories: [],
+            // emptyCatIsShow: false
         }
     },
     created() {
-        this.categories = require("./data/categories.json");
+        //this.categories = require("./data/categories.json");
     }
-};
+}
 
 </script>
 

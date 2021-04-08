@@ -1,8 +1,5 @@
 <template lang="pug">
     .about-page-component
-        headline(title="Панель администрирования")
-            user
-        navigation
         .page-content
             .container
                 .header

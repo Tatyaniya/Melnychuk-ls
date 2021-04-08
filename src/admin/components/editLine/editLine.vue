@@ -11,7 +11,7 @@
         <app-input
           placeholder="Название новой группы"
           :value="value"
-          :errorText="errorText"
+          :errorText="validation.firstError('categoryTitle')"
           v-model="categoryTitle"
           @input="$emit('input', $event)"
           @keydown.native.enter="onApprove"
