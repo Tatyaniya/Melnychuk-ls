@@ -12,7 +12,11 @@
                     )
                 ul.skills
                     li.item(v-if="emptyCatIsShow")
-                        category(empty @remove="emptyCatIsShow = false")
+                        category(
+                            empty 
+                            @remove="emptyCatIsShow = false"
+                            @approve="createCategory"
+                        )
                     li.item(v-for="category in categories" :key="category.id")
                         category(
                             :title="category.category"
@@ -43,6 +47,11 @@ export default {
     },
     created() {
         this.categories = require("../../data/categories.json");
+    },
+    methods: {
+        createCategory(categoryTitle) {
+            console.log(categoryTitle);
+        }
     }
 };
 

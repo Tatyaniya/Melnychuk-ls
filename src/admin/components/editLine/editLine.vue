@@ -11,8 +11,8 @@
         <app-input
           placeholder="Название новой группы"
           :value="value"
-          :errorText="validation.firstError('categoryTitle')"
-          v-model="categoryTitle"
+          :errorMessage="validation.firstError('title')"
+          v-model="title"
           @input="$emit('input', $event)"
           @keydown.native.enter="onApprove"
           autofocus="autofocus"
@@ -37,7 +37,7 @@ import {Validator} from 'simple-vue-validator';
 export default {
     mixin: [require('simple-vue-validator').mixin],
     validators: {
-        categoryTitle: (value) => {
+        title: (value) => {
             return Validator.value(value).required('Заполните поле');
         }
     },
@@ -56,25 +56,27 @@ export default {
     data() {
         return {
             editmode: this.editModeByDefault,
-            title: this.value
+            title: this.value,
         };
     },
     methods: {
         onApprove() {
-            // this.$validate().then(success => {
-            //     if (!success) {
-            //         return;
-            //     } else if (this.title.trim() === this.value.trim()) {
-            //         this.editmode = false;
-            //     } else {
-            //         this.$emit("approve", this.value);
-            //     }
-            // })
-            if (this.title.trim() === this.value.trim()) {
-                this.editmode = false;
-            } else {
-                this.$emit("approve", this.value);
-            }            
+            this.$validate().then(success => {
+                if (!success) {
+                    return;
+                } else if (this.title.trim() === this.value.trim()) {
+                    this.editmode = false;
+                } else {
+                    this.$emit("approve", this.value);
+                }
+            })
+            // if(this.value.trim() === "") return false;
+
+            // if (this.title.trim() === this.value.trim()) {
+            //     this.editmode = false;
+            // } else {
+            //     this.$emit("approve", this.value);
+            // }            
         }
     },
     components: {

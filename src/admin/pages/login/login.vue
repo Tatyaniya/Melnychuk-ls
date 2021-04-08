@@ -21,17 +21,15 @@
                     )
                 .button
                     appButton(
-                        //typeAttr="submit"
-                        title="Отправить"
                         :disabled="isSubmitDisabled"
-                    ) 
+                    ) Отправить
 </template>
 
 <script>
 import appInput from "../../components/input";
 import appButton from "../../components/button";
 import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
-import axios from 'axios';
+import $axios from '../../requests';
 
 export default {
     mixins: [ValidatorMixin],
@@ -55,25 +53,23 @@ export default {
         appButton
     },
     methods: {
-        handleSubmit() {
-            //console.log(axios);
-            this.$validate().then((isValid) => {
-                if (isValid === false) return;
+        async handleSubmit() {
+            if( await  this.$validate() === false ) return;
 
-                this.isSubmitDisabled = true;
+            this.isSubmitDisabled = true;
 
-                axios.post('https://webdev-api.loftschool.com/login', this.user).then(response => {
-                    const token = response.data.token;
-                    localStorage.setItem('token', token);
-                    axios.defaults.headers['Autorization'] = `Bearer ${token}`;
-                    this.$router.replace('/');
-                    console.log(response);
-                })
-                .catch((error) => console.log(error))
-                .finally(() => {
-                    this.isSubmitDisabled = false;
-                })
-            });
+            try {
+                const response = await $axios.post('login', this.user);
+                const token = response.data.token;
+
+                localStorage.setItem('token', token);
+                $axios.defaults.headers['Autorization'] = `Bearer ${token}`;
+                this.$router.replace('/');
+            } catch (error) {
+                console.log(error.response.data.error);
+            } finally {
+                this.isSubmitDisabled = false;
+            }
         },
     },
 }
