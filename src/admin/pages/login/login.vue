@@ -20,13 +20,18 @@
                         :errorMessage="validation.firstError('user.password')"
                     )
                 .button
-                    appButton Отправить
+                    appButton(
+                        //typeAttr="submit"
+                        title="Отправить"
+                        :disabled="isSubmitDisabled"
+                    ) 
 </template>
 
 <script>
 import appInput from "../../components/input";
 import appButton from "../../components/button";
 import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
+import axios from 'axios';
 
 export default {
     mixins: [ValidatorMixin],
@@ -42,7 +47,8 @@ export default {
         user: {
             name: "",
             password: ""
-        }
+        },
+        isSubmitDisabled: false
     }),
     components: {
         appInput,
@@ -50,10 +56,23 @@ export default {
     },
     methods: {
         handleSubmit() {
+            //console.log(axios);
             this.$validate().then((isValid) => {
                 if (isValid === false) return;
 
-                console.log('request');
+                this.isSubmitDisabled = true;
+
+                axios.post('https://webdev-api.loftschool.com/login', this.user).then(response => {
+                    const token = response.data.token;
+                    localStorage.setItem('token', token);
+                    axios.defaults.headers['Autorization'] = `Bearer ${token}`;
+                    this.$router.replace('/');
+                    console.log(response);
+                })
+                .catch((error) => console.log(error))
+                .finally(() => {
+                    this.isSubmitDisabled = false;
+                })
             });
         },
     },
