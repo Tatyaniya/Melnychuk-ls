@@ -30,6 +30,7 @@ import user from "../../components/user";
 import navigation from "../../components/navigation";
 import button from "../../components/button";
 import category from "../../components/category";
+import { mapActions } from 'vuex';
 
 export default {
     components: {
@@ -49,8 +50,12 @@ export default {
         this.categories = require("../../data/categories.json");
     },
     methods: {
+        ...mapActions({
+            createCategoryAction: 'categories/create'
+        }),
         createCategory(categoryTitle) {
-            console.log(categoryTitle);
+            console.log('emitted');
+            //this.createCategoryAction(categoryTitle);
         }
     }
 };

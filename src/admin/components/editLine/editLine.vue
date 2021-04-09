@@ -69,14 +69,7 @@ export default {
                 } else {
                     this.$emit("approve", this.value);
                 }
-            })
-            // if(this.value.trim() === "") return false;
-
-            // if (this.title.trim() === this.value.trim()) {
-            //     this.editmode = false;
-            // } else {
-            //     this.$emit("approve", this.value);
-            // }            
+            })          
         }
     },
     components: {

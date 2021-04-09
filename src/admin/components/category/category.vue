@@ -24,7 +24,6 @@ import card from "../card";
 import editLine from "../editLine";
 import skill from "../skill";
 import skillAddLine from "../skillAddLine";
-import { Validator } from "simple-vue-validator";
 
 export default {
     components: {
