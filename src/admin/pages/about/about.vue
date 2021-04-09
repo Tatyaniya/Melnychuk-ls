@@ -30,7 +30,7 @@ import user from "../../components/user";
 import navigation from "../../components/navigation";
 import button from "../../components/button";
 import category from "../../components/category";
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
     components: {
@@ -42,22 +42,33 @@ export default {
     },
     data() {
         return {
+            user: [],
             categories: [],
             emptyCatIsShow: false
         }
     },
-    created() {
-        this.categories = require("../../data/categories.json");
+    computed: {
+        // ...mapState('categories', {
+        //     categories: state => state.data
+        // })
     },
     methods: {
         ...mapActions({
-            createCategoryAction: 'categories/create'
+            createCategoryAction: 'categories/create',
+            getCategoriesAction: 'categories/getCats',
+            getUserAction: 'categories/getUser',
         }),
         createCategory(categoryTitle) {
             console.log('emitted');
-            //this.createCategoryAction(categoryTitle);
+            this.createCategoryAction(categoryTitle);
         }
-    }
+    },
+    created() {
+        this.categories = require("../../data/categories.json");
+        //this.getCategoriesAction();
+        //this.getUserAction();
+        console.log(this.getUserAction());
+    },
 };
 
 </script>
