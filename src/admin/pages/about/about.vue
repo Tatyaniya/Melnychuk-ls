@@ -3,7 +3,7 @@
         .page-content
             .container
                 .header
-                    .title Блок "Обо мне"
+                    .title Блок "{{this.$route.meta.title}}"
                     iconed-btn(
                         type="iconed" 
                         title="Добавить группу" 

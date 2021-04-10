@@ -6,7 +6,6 @@
 
 <script>
 
-
 export default {
     components: {},
       
@@ -17,6 +16,7 @@ export default {
         }
     },
     created() {
+        console.log(this.$router);
         //this.categories = require("./data/categories.json");
     }
 }

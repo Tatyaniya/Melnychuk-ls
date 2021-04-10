@@ -2,15 +2,15 @@
     nav.navigation-component
         .container
             ul.list
-                li.item(v-for="link in links" :key="link.id" :class="{active: link.active}")
-                    a.link(href="`/${link.alias}`") {{link.title}}
+                li.item(v-for="link in links" :key="link.id")
+                    router-link.link(:to="link.alias" exact active-class="active") {{link.title}}
 </template>
 
 <script>
 const links = [
-  {id: 0, title: "Обо мне", alias: "about", active: false},
-  {id: 1, title: "Работы", alias: "works", active: true},
-  {id: 2, title: "Отзывы", alias: "reviews", active: false},
+  {id: 0, title: "Обо мне", alias: "/"},
+  {id: 1, title: "Работы", alias: "/works"},
+  {id: 2, title: "Отзывы", alias: "/reviews"},
 ];
 
 export default {

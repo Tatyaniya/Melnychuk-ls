@@ -1,8 +1,7 @@
 export default {
     namespaced: true,
     state: {
-        data: [],
-        user: []
+        data: []
     },
     mutations: {
         SET_CATEGORIES: (state, categories) => (state.data = categories),
@@ -38,7 +37,6 @@ export default {
             } catch (error) {
                 console.log(error);
             }
-            console.log(title);
         }
     }
 }
