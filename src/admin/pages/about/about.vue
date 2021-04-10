@@ -48,9 +48,9 @@ export default {
         }
     },
     computed: {
-        // ...mapState('categories', {
-        //     categories: state => state.data
-        // })
+        ...mapState('categories', {
+            categories: state => state.data
+        })
     },
     methods: {
         ...mapActions({
@@ -59,8 +59,8 @@ export default {
             getUserAction: 'categories/getUser',
         }),
         createCategory(categoryTitle) {
-            console.log('emitted');
-            this.createCategoryAction(categoryTitle);
+            console.log(categoryTitle);
+            //this.createCategoryAction(categoryTitle);
         }
     },
     created() {

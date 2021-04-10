@@ -14,14 +14,14 @@
           :errorMessage="validation.firstError('title')"
           v-model="title"
           @input="$emit('input', $event)"
-          @keydown.native.enter="onApprove"
+          @keydown.native.enter="$emit('approve')"
           autofocus="autofocus"
           no-side-paddings="no-side-paddings"
         ></app-input>
       </div>
       <div class="buttons">
         <div class="button-icon">
-          <icon symbol="tick" @click="onApprove"></icon>
+          <icon symbol="tick" @click="$emit('approve')"></icon>
         </div>
         <div class="button-icon">
           <icon symbol="cross" @click="$emit('remove')"></icon>
