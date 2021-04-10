@@ -11,7 +11,8 @@
         <app-input
           placeholder="Название новой группы"
           :value="value"
-          :errorText="errorText"
+          :errorMessage="validation.firstError('title')"
+          v-model="title"
           @input="$emit('input', $event)"
           @keydown.native.enter="onApprove"
           autofocus="autofocus"
@@ -31,37 +32,50 @@
 </template>
 
 <script>
+import {Validator} from 'simple-vue-validator';
+
 export default {
-  props: {
-    value: {
-      type: String,
-      default: ""
+    mixin: [require('simple-vue-validator').mixin],
+    validators: {
+        title: (value) => {
+            return Validator.value(value).required('Заполните поле');
+        }
     },
-    errorText: {
-      type: String,
-      default: ""
+    props: {
+        value: {
+            type: String,
+            default: ""
+        },
+        errorText: {
+            type: String,
+            default: ""
+        },
+            blocked: Boolean,
+            editModeByDefault: Boolean
     },
-    blocked: Boolean
-  },
-  data() {
-    return {
-      editmode: false,
-      title: this.value
-    };
-  },
-  methods: {
-    onApprove() {
-      if (this.title.trim() === this.value.trim()) {
-        this.editmode = false;
-      } else {
-        this.$emit("approve", this.value);
-      }
+    data() {
+        return {
+            editmode: this.editModeByDefault,
+            title: this.value,
+        };
+    },
+    methods: {
+        onApprove() {
+            this.$validate().then(success => {
+                if (!success) {
+                    return;
+                } else if (this.title.trim() === this.value.trim()) {
+                    this.editmode = false;
+                } else {
+                    this.$emit("approve", this.value);
+                }
+            })          
+        }
+    },
+    components: {
+        icon: () => import("components/icon"),
+        appInput: () => import("components/input")
     }
-  },
-  components: {
-    icon: () => import("components/icon"),
-    appInput: () => import("components/input")
-  }
 };
 </script>
 
