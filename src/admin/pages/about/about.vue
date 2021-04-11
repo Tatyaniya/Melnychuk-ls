@@ -36,30 +36,28 @@ export default {
     },
     data() {
         return {
-            categories: [],
             emptyCatIsShow: false
         }
     },
     computed: {
         ...mapState('categories', {
-            categories: state => state.data
+            categories: state => state.categories
         })
     },
     methods: {
         ...mapActions({
             createCategoryAction: 'categories/addCategory',
             getCategoriesAction: 'categories/getCats',
+            getUserAction: 'user/getUser',
         }),
         createCategory(categoryTitle) {
-            console.log(categoryTitle);
-            //this.createCategoryAction(categoryTitle);
+            this.createCategoryAction(categoryTitle);
         }
     },
     created() {
-        this.categories = require("../../data/categories.json");
-        // this.getCategoriesAction();
-        // this.getUserAction();
-        //console.log(this.getUserAction());
+        //this.categories = require("../../data/categories.json");
+        this.getUserAction();
+        this.categories = this.getCategoriesAction();
     },
 };
 

@@ -5,7 +5,7 @@ export default {
     },
     mutations: {
         SET_USER(state, user) {
-            state.data = user
+            state.user = user
         },
     },
     actions: {

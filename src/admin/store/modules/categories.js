@@ -13,19 +13,18 @@ export default {
         async addCategory(store, title) {
             try {
                 const response = await this.$axios.post('/categories', {title: title});
-                commit('ADD_CATEGORY', response.data);
-                console.log(response);
+                store.commit('ADD_CATEGORY', response.data);
+                console.log("add", response);
             } catch (error) {
                 console.log(error);
             }
-            console.log(title);
         },
         async getCats(store) {
             try {
-                const userId = store.rootState.user.id;
+                const userId = await store.rootState.user.id;
                 const response = await this.$axios.get(`/categories/${userId}`);
                 store.commit('SET_CATEGORIES', response.data);
-                console.log(response);
+                console.log('get', response);
             } catch (error) {
                 console.log(error);
             }
