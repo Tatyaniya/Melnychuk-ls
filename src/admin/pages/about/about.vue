@@ -1,7 +1,7 @@
 <template lang="pug">
     .about-page-component
         .page-content
-            .container
+            .container(v-if='categories.length')
                 .header
                     .title Блок "{{this.$route.meta.title}}"
                     iconedBtn(
@@ -21,7 +21,11 @@
                         category(
                             :title="category.category"
                             :skills="category.skills"
+                            @approve="editCategory(category.id)"
+                            @remove="deleteCat(category.id)"
                         )
+            .container(v-else)
+                h3 Please, wait
 </template>
 
 <script>
@@ -47,6 +51,8 @@ export default {
     methods: {
         ...mapActions({
             createCategoryAction: 'categories/addCategory',
+            deleteCategoryAction: 'categories/deleteCat',
+            editCategoryAction: 'categories/editCat',
             getCategoriesAction: 'categories/getCats',
             getUserAction: 'user/getUser',
         }),
@@ -57,6 +63,17 @@ export default {
             } catch (error) {
                 console.log(error.message); 
             }
+        },
+        async deleteCat(id) {
+            this.deleteCategoryAction(id);
+            this.categories = this.getCategoriesAction();
+
+            return this.categories;            
+        },
+        async editCat(id) {
+            this.editCategoryAction(id);
+
+            
         }
     },
     created() {
