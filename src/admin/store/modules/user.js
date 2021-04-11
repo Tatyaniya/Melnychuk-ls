@@ -4,8 +4,8 @@ export default {
        user: null
     },
     mutations: {
-        SET_USER(state, user) {
-            state.user = user
+        SET_USER(state, payload) {
+            state.user = payload.user
         },
     },
     actions: {
@@ -13,7 +13,6 @@ export default {
             try {
                 const user = await this.$axios.get('/user');
                 context.commit('SET_USER', user.data);
-                console.log(user);
             } catch (error) {
                 console.log(error);
             }

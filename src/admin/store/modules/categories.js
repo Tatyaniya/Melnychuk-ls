@@ -23,13 +23,12 @@ export default {
         },
         async getCats(store) {
             try {
-                // const userId = await store.rootState.user.id;
+                // const userId = await store.rootState.user.user.id;
                 // const response = await this.$axios.get(`/categories/${userId}`);
                 const response = await this.$axios.get('/categories/454');
                 store.commit('SET_CATEGORIES', response.data);
-                console.log('get', response);
             } catch (error) {
-                console.log(error);
+                throw new Error('Произошла ошибка');
             }
         }
     }

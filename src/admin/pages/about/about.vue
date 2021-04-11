@@ -50,8 +50,13 @@ export default {
             getCategoriesAction: 'categories/getCats',
             getUserAction: 'user/getUser',
         }),
-        createCategory(categoryTitle) {
-            this.createCategoryAction(categoryTitle);
+        async createCategory(categoryTitle) {
+            try {
+                this.createCategoryAction(categoryTitle);
+                this.emptyCatIsShow = false;
+            } catch (error) {
+                console.log(error.message); 
+            }
         }
     },
     created() {
