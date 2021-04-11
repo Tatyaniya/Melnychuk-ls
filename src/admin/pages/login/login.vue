@@ -78,7 +78,7 @@ export default {
                 this.isSubmitDisabled = false;
             }
         },
-    },
+    }
 }
 </script>
 

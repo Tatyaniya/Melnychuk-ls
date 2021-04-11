@@ -43,10 +43,16 @@ export default {
             emptyCatIsShow: false
         }
     },
-    computed: {
-        ...mapState('categories', {
-            categories: state => state.categories
-        })
+    _computed: {
+      ...mapState('categories', {
+        categories: state => state.categories
+      })
+    },
+    get computed() {
+      return this._computed;
+    },
+    set computed(value) {
+      this._computed=value;
     },
     methods: {
         ...mapActions({
@@ -77,7 +83,6 @@ export default {
         }
     },
     created() {
-        //this.categories = require("../../data/categories.json");
         this.getUserAction();
         this.categories = this.getCategoriesAction();
     },

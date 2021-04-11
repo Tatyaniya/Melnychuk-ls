@@ -18,5 +18,10 @@ export default {
             }
             
         }
+    },
+    getters: {
+        userIsLogged: ({ user }) => {
+          return !!user;
+        }
     }
 }

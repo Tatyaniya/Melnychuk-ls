@@ -8,6 +8,8 @@ import about from "./pages/about";
 import works from "./pages/works";
 import reviews from "./pages/reviews";
 import login from "./pages/login";
+import store from "./store";
+import $axios from "./requests";
 
 const routes = [
   {
@@ -43,7 +45,46 @@ const routes = [
   {
     path: "/login",
     component: login,
+    meta: {
+        public: true
+    }
   },
 ];
 
-export default new VueRouter({ routes });
+const router = new VueRouter({ routes });
+
+router.beforeEach(async (to, from, next) => {
+    const isPublicRoute = to.matched.some(record => record.meta.public);
+    const isUserLogged = store.getters["user/userIsLogged"];
+
+    if (!isUserLogged) {
+        const token = localStorage.getItem('token');
+
+        if (!token && isPublicRoute) {
+            next();
+        } else if (token) {
+            $axios.defaults.headers['Authorization'] = `Bearer ${ token }`;
+        
+            try {
+                const response = await $axios.get('/user');
+
+                store.commit("user/SET_USER", response.user.user);
+
+                (from.path === "/login") ? next() : next({ path: from.path });
+            } catch (e) {
+                
+                localStorage.removeItem('token');
+
+                next('/login');
+            }
+        } else {
+            next('/login');
+        }
+    } else if (isPublicRoute && isUserLogged) {
+        next({ path: from.path });
+    } else {
+        next();
+    }
+});
+
+export default router;

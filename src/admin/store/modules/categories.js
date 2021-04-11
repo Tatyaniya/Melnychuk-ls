@@ -13,10 +13,10 @@ export default {
         DELETE_CATEGORY(state) {
             return state.categories;
         },
-        EDIT_CATEGORY(state, aditCategory) {
+        EDIT_CATEGORY(state, editedCat) {
             state.categories.map(category => {
-                if(category.id = aditCategory.id) {
-                    category.category = aditCategory.category;
+                if(category.id = editedCat.id) {
+                    category.category = editedCat.category;
                 }
 
                 return category;
@@ -45,7 +45,7 @@ export default {
         async deleteCat(store, id) {
             try {
                 await this.$axios.delete(`/categories/${id}`);
-                store.commit('DELETE_CATEGORY');
+                store.commit('DELETE_CATEGORY', id);
             } catch (error) {
                 console.log(error);
             }
