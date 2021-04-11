@@ -7,7 +7,9 @@ export default {
         SET_CATEGORIES(state, categories) {
             state.categories = categories;
         },
-        ADD_CATEGORY: (state, category) => state.categories.unshift(category)
+        ADD_CATEGORY(state, category) {
+            state.categories.unshift(category);
+        }
     },
     actions: {
         async addCategory(store, title) {
@@ -21,8 +23,9 @@ export default {
         },
         async getCats(store) {
             try {
-                const userId = await store.rootState.user.id;
-                const response = await this.$axios.get(`/categories/${userId}`);
+                // const userId = await store.rootState.user.id;
+                // const response = await this.$axios.get(`/categories/${userId}`);
+                const response = await this.$axios.get('/categories/454');
                 store.commit('SET_CATEGORIES', response.data);
                 console.log('get', response);
             } catch (error) {
