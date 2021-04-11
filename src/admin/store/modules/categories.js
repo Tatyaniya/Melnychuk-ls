@@ -1,15 +1,16 @@
 export default {
     namespaced: true,
     state: {
-        data: []
+        categories: []
     },
     mutations: {
-        SET_CATEGORIES: (state, categories) => (state.data = categories),
-        ADD_CATEGORY: (state, category) => state.data.unshift(category),
-        SET_USER: (state, user) => (state.data = user),
+        SET_CATEGORIES(state, categories) {
+            state.categories = categories;
+        },
+        ADD_CATEGORY: (state, category) => state.categories.unshift(category)
     },
     actions: {
-        async create(store, title) {
+        async addCategory(store, title) {
             try {
                 const response = await this.$axios.post('/categories', {title: title});
                 commit('ADD_CATEGORY', response.data);
@@ -19,19 +20,10 @@ export default {
             }
             console.log(title);
         },
-        async getUser(store) {
-            try {
-                const user = await this.$axios.post('/user');
-                store.commit('SET_USER', response.data);
-                console.log(user);
-            } catch (error) {
-                console.log(error);
-            }
-            
-        },
         async getCats(store) {
             try {
-                const response = await this.$axios.get('/categories');
+                const userId = store.rootState.user.id;
+                const response = await this.$axios.get(`/categories/${userId}`);
                 store.commit('SET_CATEGORIES', response.data);
                 console.log(response);
             } catch (error) {

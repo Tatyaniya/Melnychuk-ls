@@ -4,7 +4,7 @@
             .container
                 .header
                     .title Блок "{{this.$route.meta.title}}"
-                    iconed-btn(
+                    iconedBtn(
                         type="iconed" 
                         title="Добавить группу" 
                         @click="emptyCatIsShow = true"
@@ -25,24 +25,17 @@
 </template>
 
 <script>
-import headline from "../../components/headline";
-import user from "../../components/user";
-import navigation from "../../components/navigation";
 import button from "../../components/button";
 import category from "../../components/category";
 import { mapActions, mapState } from 'vuex';
 
 export default {
     components: {
-        headline,
-        user,
-        navigation,
         iconedBtn: button,
         category
     },
     data() {
         return {
-            user: [],
             categories: [],
             emptyCatIsShow: false
         }
@@ -54,9 +47,8 @@ export default {
     },
     methods: {
         ...mapActions({
-            createCategoryAction: 'categories/create',
+            createCategoryAction: 'categories/addCategory',
             getCategoriesAction: 'categories/getCats',
-            getUserAction: 'categories/getUser',
         }),
         createCategory(categoryTitle) {
             console.log(categoryTitle);
@@ -65,9 +57,9 @@ export default {
     },
     created() {
         this.categories = require("../../data/categories.json");
-        //this.getCategoriesAction();
-        //this.getUserAction();
-        console.log(this.getUserAction());
+        // this.getCategoriesAction();
+        // this.getUserAction();
+        //console.log(this.getUserAction());
     },
 };
 

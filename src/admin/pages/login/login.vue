@@ -29,7 +29,7 @@
 import appInput from "../../components/input";
 import appButton from "../../components/button";
 import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
-import $axios from '../../requests';
+import { mapActions } from 'vuex';
 
 export default {
     mixins: [ValidatorMixin],
@@ -53,18 +53,24 @@ export default {
         appButton
     },
     methods: {
+        ...mapActions({
+            getUser: 'user/getUser'
+        }),
         async handleSubmit() {
-            if( await  this.$validate() === false ) return;
+            if( await  this.$validate() === false ) {
+                return;
+            }
 
             this.isSubmitDisabled = true;
 
             try {
-                const response = await $axios.post('login', this.user);
+                const response = await this.$axios.post('/login', this.user);
                 const token = response.data.token;
 
                 localStorage.setItem('token', token);
-                $axios.defaults.headers['Autorization'] = `Bearer ${token}`;
-                console.log(response);
+                this.$axios.defaults.headers['Authorization'] = `Bearer ${token}`;
+
+                await this.getUser();
                 this.$router.replace('/');
             } catch (error) {
                 console.log(error.response.data.error);

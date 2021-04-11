@@ -50,8 +50,8 @@ export default {
             type: String,
             default: ""
         },
-            blocked: Boolean,
-            editModeByDefault: Boolean
+        blocked: Boolean,
+        editModeByDefault: Boolean
     },
     data() {
         return {
