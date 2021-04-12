@@ -1,22 +1,23 @@
 <template lang="pug">
     .app-container
-        router-view(name="header")
+        router-view(name="header" @logout="logout")
         router-view
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 
 export default {
-    components: {},
-      
-    data() {
-        return {
-            // categories: [],
-            // emptyCatIsShow: false
+    methods: {
+        ...mapActions({
+            logoutAction: 'user/userOut',
+        }),
+        logout() {
+            localStorage.clear();
+            this.$axios.defaults.headers['Authorization'] = '';
+            this.logoutAction();
+            this.$router.replace('/login');
         }
-    },
-    created() {
-        //this.categories = require("./data/categories.json");
     }
 }
 

@@ -7,6 +7,9 @@ export default {
         SET_USER(state, payload) {
             state.user = payload.user
         },
+        DELETE_USER(state) {
+            state.user = null;
+        }
     },
     actions: {
         async getUser(context) {
@@ -23,5 +26,8 @@ export default {
         userIsLogged: ({ user }) => {
           return !!user;
         }
+    },
+    userOut(state) {
+        state.commit('DELETE_USER');
     }
 }

@@ -16,7 +16,10 @@
                         @approve="$emit('editSkill', $event)"
                         )
             .bottom-line
-                skillAddLine(:blocked="empty")
+                skillAddLine(
+                    @approve="$emit('createSkill', $event)"
+                    :blocked="empty"
+                )
 </template>
 
 <script>

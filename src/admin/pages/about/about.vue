@@ -23,6 +23,9 @@
                             :skills="category.skills"
                             @approve="editCategory(category.id)"
                             @remove="deleteCat(category.id)"
+                            @createSkill="createSkill"
+                            @editSkill="editSkill"
+                            @removeSkill="removeSkill"
                         )
             .container(v-else)
                 h3 Please, wait
@@ -43,16 +46,10 @@ export default {
             emptyCatIsShow: false
         }
     },
-    _computed: {
-      ...mapState('categories', {
+    computed: {
+    ...mapState('categories', {
         categories: state => state.categories
-      })
-    },
-    get computed() {
-      return this._computed;
-    },
-    set computed(value) {
-      this._computed=value;
+    })
     },
     methods: {
         ...mapActions({
@@ -61,7 +58,19 @@ export default {
             editCategoryAction: 'categories/editCat',
             getCategoriesAction: 'categories/getCats',
             getUserAction: 'user/getUser',
+            addSkillAction: "skills/add",
+            editSkillAction: "skills/edit",
+            removeSkillAction: "skills/remove",
         }),
+        createSkill() {
+            this.addSkillAction();
+        },
+        editSkill() {
+            this.editSkillAction();
+        },
+        removeSkill() {
+            this.removeSkillAction();
+        },
         async createCategory(categoryTitle) {
             try {
                 this.createCategoryAction(categoryTitle);
@@ -78,8 +87,6 @@ export default {
         },
         async editCat(id) {
             this.editCategoryAction(id);
-
-            
         }
     },
     created() {
