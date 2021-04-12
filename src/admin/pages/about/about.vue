@@ -6,8 +6,8 @@
                     .title Блок "{{this.$route.meta.title}}"
                     iconedBtn(
                         type="iconed" 
-                        title="Добавить группу" 
-                        @click="emptyCatIsShow = true"
+                        title="Добавить группу"
+                        @click="editCat"
                         v-if="emptyCatIsShow === false"
                     )
                 pre {{categories}}
@@ -74,11 +74,12 @@ export default {
             skill.title = "";
             skill.percent = "";
         },
-        editSkill() {
-            this.editSkillAction();
+        async editSkill(skill) {
+            await this.editSkillAction(skill);
+            skill.editmode = false;
         },
-        removeSkill() {
-            this.removeSkillAction();
+        removeSkill(skill) {
+            this.removeSkillAction(skill);
         },
         async createCategory(categoryTitle) {
             try {
@@ -94,8 +95,10 @@ export default {
 
             return this.categories;            
         },
-        async editCat(id) {
-            this.editCategoryAction(id);
+        async editCat(category) {
+            console.log(category);
+            this.emptyCatIsShow = true;
+            //this.editCategoryAction(category);
         }
     },
     created() {

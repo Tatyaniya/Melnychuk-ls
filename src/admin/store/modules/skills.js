@@ -3,9 +3,6 @@ export default {
     state: {
        skills: []
     },
-    mutations: {
-        //SET_USER: (state, user) => (state.data = user),
-    },
     actions: {
         async add(store, skill) {
             try {
@@ -15,11 +12,21 @@ export default {
                 throw new Error('Не удалось создать скилл');
             }
         },
-        remove() {
-            console.log('remove');
+        async remove(store, skill) {
+            try {
+                const response = await this.$axios.delete(`/skills/${skill.id}`);
+                store.commit('categories/REMOVE_SKILL', skill, {root: true});
+            } catch (error) {
+                throw new Error('Ошибка удаления скилла');
+            }
         },
-        edit() {
-            console.log('edit');
+        async edit(store, skill) {
+            try {
+                const response = await this.$axios.post(`/skills/${skill.id}`, skill);
+                store.commit('categories/EDIT_SKILL', response.data.skill, {root: true});
+            } catch (error) {
+                throw new Error('Ошибка редактирования скилла');
+            }
         }
     }
 }
