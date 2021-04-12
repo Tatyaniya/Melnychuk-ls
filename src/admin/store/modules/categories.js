@@ -10,13 +10,22 @@ export default {
         ADD_CATEGORY(state, category) {
             state.categories.unshift(category);
         },
-        DELETE_CATEGORY(state) {
-            return state.categories;
+        DELETE_CATEGORY(state, id) {
+            state.categories = state.categories.filter(category => category.id == id);
         },
         EDIT_CATEGORY(state, editedCat) {
             state.categories.map(category => {
                 if(category.id = editedCat.id) {
                     category.category = editedCat.category;
+                }
+
+                return category;
+            })
+        },
+        ADD_SKILL(state, newSkill) {
+            state.categories = state.categories.map(category => {
+                if (category.id === newSkill.category) {
+                    category.skills.push(newSkill);
                 }
 
                 return category;

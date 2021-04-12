@@ -10,6 +10,7 @@
                         @click="emptyCatIsShow = true"
                         v-if="emptyCatIsShow === false"
                     )
+                pre {{categories}}
                 ul.skills
                     li.item(v-if="emptyCatIsShow")
                         category(
@@ -23,7 +24,7 @@
                             :skills="category.skills"
                             @approve="editCategory(category.id)"
                             @remove="deleteCat(category.id)"
-                            @createSkill="createSkill"
+                            @createSkill="createSkill($event, category.id)"
                             @editSkill="editSkill"
                             @removeSkill="removeSkill"
                         )
@@ -62,8 +63,16 @@ export default {
             editSkillAction: "skills/edit",
             removeSkillAction: "skills/remove",
         }),
-        createSkill() {
-            this.addSkillAction();
+        async createSkill(skill, categoryId) {
+            const newSkill = {
+                ...skill,
+                category: categoryId
+            }
+
+            await this.addSkillAction(newSkill);
+
+            skill.title = "";
+            skill.percent = "";
         },
         editSkill() {
             this.editSkillAction();
