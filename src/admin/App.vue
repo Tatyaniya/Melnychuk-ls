@@ -2,15 +2,32 @@
     .app-container
         router-view(name="header" @logout="logout")
         router-view
+        .notify-container(:class="{active: isTooltipShown}")
+            .notification
+                notification(
+                    :text="tooltipText"
+                    :type="tooltipType"
+                    @click="hideTooltip"
+                )
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import notification from "./components/notification";
 
 export default {
+    components: { notification },
+    computed: {
+        ...mapState("tooltips", {
+        isTooltipShown: state => state.isShown,
+        tooltipText: state => state.text,
+        tooltipType: state => state.type,
+        }),
+    },
     methods: {
         ...mapActions({
             logoutAction: 'user/userOut',
+            hideTooltip: "tooltips/hide"
         }),
         logout() {
             localStorage.clear();

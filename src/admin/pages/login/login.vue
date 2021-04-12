@@ -54,7 +54,8 @@ export default {
     },
     methods: {
         ...mapActions({
-            getUser: 'user/getUser'
+            getUser: 'user/getUser',
+            showTooltip: "tooltips/show"
         }),
         async handleSubmit() {
             if( await  this.$validate() === false ) {
@@ -73,7 +74,10 @@ export default {
                 await this.getUser();
                 this.$router.replace('/');
             } catch (error) {
-                console.log(error.response.data.error);
+                this.showTooltip({
+                    text: error.response.data.error,
+                    type: "error"
+                })
             } finally {
                 this.isSubmitDisabled = false;
             }
