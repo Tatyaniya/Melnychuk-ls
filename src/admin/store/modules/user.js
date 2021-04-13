@@ -20,14 +20,16 @@ export default {
                 console.log(error);
             }
             
+        },
+        userOut(state) {
+            state.commit('DELETE_USER');
+            localStorage.removeItem('token');
+            this.$axios.defaults.headers['Authorization'] = '';
         }
     },
     getters: {
         userIsLogged: ({ user }) => {
           return !!user;
         }
-    },
-    userOut(state) {
-        state.commit('DELETE_USER');
     }
 }

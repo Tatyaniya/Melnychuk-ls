@@ -7,7 +7,7 @@
                     iconedBtn(
                         type="iconed" 
                         title="Добавить группу"
-                        @click="editCat"
+                        @click="emptyCatIsShow = true"
                         v-if="emptyCatIsShow === false"
                     )
                 pre {{categories}}
@@ -22,7 +22,7 @@
                         category(
                             :title="category.category"
                             :skills="category.skills"
-                            @approve="editCategory(category.id)"
+                            @edit="editCat(category)"
                             @remove="deleteCat(category.id)"
                             @createSkill="createSkill($event, category.id)"
                             @editSkill="editSkill"
@@ -48,9 +48,9 @@ export default {
         }
     },
     computed: {
-    ...mapState('categories', {
-        categories: state => state.categories
-    })
+        ...mapState('categories', {
+            categories: state => state.categories
+        })
     },
     methods: {
         ...mapActions({
@@ -83,7 +83,7 @@ export default {
         },
         async createCategory(categoryTitle) {
             try {
-                this.createCategoryAction(categoryTitle);
+                await this.createCategoryAction(categoryTitle);
                 this.emptyCatIsShow = false;
             } catch (error) {
                 console.log(error.message); 
@@ -97,8 +97,8 @@ export default {
         },
         async editCat(category) {
             console.log(category);
-            this.emptyCatIsShow = true;
-            //this.editCategoryAction(category);
+            await this.editCategoryAction(category);
+            this.editmode = false;
         }
     },
     created() {

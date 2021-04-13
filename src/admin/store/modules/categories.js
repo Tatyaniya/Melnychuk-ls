@@ -11,7 +11,7 @@ export default {
             state.categories.unshift(category);
         },
         DELETE_CATEGORY(state, id) {
-            state.categories = state.categories.filter(category => category.id == id);
+            state.categories = state.categories.filter(category => category.id !== id);
         },
         EDIT_CATEGORY(state, editedCat) {
             state.categories = state.categories.map(category => {
@@ -85,7 +85,8 @@ export default {
         },
         async editCat(store, category) {
             try {
-                const response = await this.$axios.post(`/categories/${category.id}`, {title: category.title});
+                const response = await this.$axios.post(`/categories/${category.id}`, {title: category.category});
+                console.log(response.data);
                 store.commit('EDIT_CATEGORY', response.data);
             } catch (error) {
                 throw new Error('Ошибка редактирования категории');

@@ -5,7 +5,7 @@
             v-model="categoryTitle" 
             :editModeByDefault="empty"
             @remove="$emit('remove', $event)"
-            @approve="$emit('approve', $event)"
+            @approve="$emit('approve', value)"
             )
         template(slot="content")
             ul.skills(v-if="empty === false")

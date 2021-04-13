@@ -29,10 +29,8 @@ export default {
             logoutAction: 'user/userOut',
             hideTooltip: "tooltips/hide"
         }),
-        logout() {
-            localStorage.clear();
-            this.$axios.defaults.headers['Authorization'] = '';
-            this.logoutAction();
+        async logout() {
+            await this.logoutAction();
             this.$router.replace('/login');
         }
     }
