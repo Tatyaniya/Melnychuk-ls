@@ -21,7 +21,7 @@
       </div>
       <div class="buttons">
         <div class="button-icon">
-          <icon symbol="tick" @click="$emit('approve', value)"></icon>
+          <icon symbol="tick" @click="$emit('approve', title)"></icon>
         </div>
         <div class="button-icon">
           <icon symbol="cross" @click="$emit('remove', $event)"></icon>

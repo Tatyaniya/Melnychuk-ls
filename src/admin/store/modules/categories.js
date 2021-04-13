@@ -83,9 +83,9 @@ export default {
                 throw new Error('Ошибка удаления категории');
             }
         },
-        async editCat(store, category) {
+        async editCat(store, title, category) {
             try {
-                const response = await this.$axios.post(`/categories/${category.id}`, {title: category.category});
+                const response = await this.$axios.post(`/categories/${category.id}`, {title: title});
                 console.log(response.data);
                 store.commit('EDIT_CATEGORY', response.data);
             } catch (error) {

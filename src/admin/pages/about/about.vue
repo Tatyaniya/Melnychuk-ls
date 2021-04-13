@@ -22,7 +22,7 @@
                         category(
                             :title="category.category"
                             :skills="category.skills"
-                            @edit="editCat(category)"
+                            @approve="editCat($event, category)"
                             @remove="deleteCat(category.id)"
                             @createSkill="createSkill($event, category.id)"
                             @editSkill="editSkill"
@@ -90,14 +90,14 @@ export default {
             }
         },
         async deleteCat(id) {
-            this.deleteCategoryAction(id);
+            await this.deleteCategoryAction(id);
             this.categories = this.getCategoriesAction();
 
             return this.categories;            
         },
-        async editCat(category) {
-            console.log(category);
-            await this.editCategoryAction(category);
+        async editCat(title, category) {
+            console.log(title);
+            await this.editCategoryAction(title, category);
             this.editmode = false;
         }
     },
