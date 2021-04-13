@@ -14,8 +14,8 @@
         </div>
         <a :href="work.link" class="link">{{work.link}}</a>
         <div class="btns">
-          <icon symbol="pencil" title="Править"></icon>
-          <icon symbol="trash" title="Удалить"></icon>
+          <icon symbol="pencil" title="Править" @click="$emit('edit', currentWork)"></icon>
+          <icon symbol="trash" title="Удалить" @click="$emit('remove', currentWork)"></icon>
         </div>
       </div>
     </div>
@@ -35,6 +35,17 @@ export default {
     },
     props: {
         work: Object,
+    },
+    data() {
+        return {
+            currentWork: {
+                id: this.work.id,
+                title: this.work.title,
+                description: this.work.description,
+                link: this.work.link,
+                techs: this.work.techs
+            }
+        }
     },
     computed: {
         cover() {

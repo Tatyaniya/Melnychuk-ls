@@ -10,6 +10,8 @@
                     li.item(v-for="work in works" :key="work.id")
                         workCard(
                             :work="work"
+                            @edit="edit"
+                            @remove="remove"
                         )
 </template>
 
@@ -30,8 +32,16 @@ export default {
     },
     methods: {
         ...mapActions({
-            getWorks: "works/get"
+            getWorks: "works/get",
+            removeWork: "works/remove",
+            editWork: "works/edit",
         }),
+        remove(currentWork) {
+            this.removeWork(currentWork.id);
+        },
+        edit(currentWork) {
+            this.editWork(currentWork);
+        }
     },
     mounted() {
         this.getWorks();

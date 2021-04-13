@@ -54,6 +54,7 @@ const routes = [
 const router = new VueRouter({ routes });
 
 router.beforeEach(async (to, from, next) => {
+    // роут публичный, если в meta есть свойство public
     const isPublicRoute = to.matched.some(record => record.meta.public);
     const isUserLogged = store.getters["user/userIsLogged"];
 

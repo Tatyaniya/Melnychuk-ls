@@ -10,7 +10,7 @@
                         @click="emptyCatIsShow = true"
                         v-if="emptyCatIsShow === false"
                     )
-                pre {{categories}}
+                
                 ul.skills
                     li.item(v-if="emptyCatIsShow")
                         category(
