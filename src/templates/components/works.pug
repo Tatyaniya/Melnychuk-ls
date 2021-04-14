@@ -47,14 +47,14 @@ script(type="text/x-template")#works-btns
 script(type="text/x-template")#works-info
     .works-data
         tags(
-           // :tags="tagsArray"
+            //:tags="tagsArray"
         )
         .works-data__subtitle {{currentWork.title}}
         .works-data__text
             p {{currentWork.description}}
         .view-site
             +icon('link', 'view-site__icon')
-            a(href="`${currentWork.link}`").view-site__link&attributes({'target': '_blank'}) Посмотреть сайт
+            a(:href="currentWork.link").view-site__link&attributes({'target': '_blank'}) Посмотреть сайт
             
 
 script(type="text/x-template")#works-tags

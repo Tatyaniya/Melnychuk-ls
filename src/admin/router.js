@@ -61,9 +61,14 @@ router.beforeEach(async (to, from, next) => {
     if (!isUserLogged) {
         const token = localStorage.getItem('token');
 
+        console.warn('[строка 64] isUserLogged is false');
+
         if (!token && isPublicRoute) {
+            console.warn('[строка 67] I\'is public route and the token was not found in localStorage');
             next();
         } else if (token) {
+            console.warn('[строка 70] token found in localStorage');
+
             $axios.defaults.headers['Authorization'] = `Bearer ${ token }`;
         
             try {
@@ -71,14 +76,22 @@ router.beforeEach(async (to, from, next) => {
 
                 store.commit("user/SET_USER", response.user.user);
 
+                console.warn('[строка 79] The user\'s object was successfully fetched', from.path);
+
+                next();
+
                 (from.path === "/login") ? next() : next({ path: from.path });
             } catch (e) {
-                
-                localStorage.removeItem('token');
+                console.warn('[строка 85] The user\'s object was not fetched');
 
-                next('/login');
+                next();
+                
+                // localStorage.removeItem('token');
+
+                // next('/login');
             }
         } else {
+            console.warn('[строка 92] token was not found in localStorage');
             next('/login');
         }
     } else if (isPublicRoute && isUserLogged) {

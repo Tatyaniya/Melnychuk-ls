@@ -1,14 +1,14 @@
 export default {
     namespaced: true,
     state: {
-       user: null
+       user: {}
     },
     mutations: {
         SET_USER(state, payload) {
             state.user = payload.user
         },
         DELETE_USER(state) {
-            state.user = null;
+            state.user = {};
         }
     },
     actions: {
@@ -29,7 +29,7 @@ export default {
     },
     getters: {
         userIsLogged: ({ user }) => {
-          return !!user;
+            return (Object.keys(user).length === 0 && user.constructor === Object) === false;
         }
     }
 }

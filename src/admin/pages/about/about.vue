@@ -70,31 +70,85 @@ export default {
                 category: categoryId
             }
 
-            await this.addSkillAction(newSkill);
+            try {
+                await this.addSkillAction(newSkill);
 
-            skill.title = "";
-            skill.percent = "";
+                skill.title = "";
+                skill.percent = "";
+               
+                this.showTooltip({
+                    text: "Навык успешно добавлен",
+                    type: "success"
+                })
+            } catch (error) {
+                this.showTooltip({
+                    text: error.response.data.error,
+                    type: "error"
+                })
+            }
+
+            
         },
         async editSkill(skill) {
-            await this.editSkillAction(skill);
-            skill.editmode = false;
+            try {
+                await this.editSkillAction(skill);
+                skill.editmode = false;
+               
+                this.showTooltip({
+                    text: "Навык успешно изменен",
+                    type: "success"
+                })
+            } catch (error) {
+                this.showTooltip({
+                    text: error.response.data.error,
+                    type: "error"
+                })
+            }
         },
         removeSkill(skill) {
-            this.removeSkillAction(skill);
+            try {
+                this.removeSkillAction(skill);
+               
+                this.showTooltip({
+                    text: "Навык успешно удален",
+                    type: "success"
+                })
+            } catch (error) {
+                this.showTooltip({
+                    text: error.response.data.error,
+                    type: "error"
+                })
+            }
         },
         async createCategory(categoryTitle) {
             try {
                 await this.createCategoryAction(categoryTitle);
                 this.emptyCatIsShow = false;
+
+                this.showTooltip({
+                    text: "Категория успешно создана",
+                    type: "success"
+                })
             } catch (error) {
-                console.log(error.message); 
+                this.showTooltip({
+                    text: error.response.data.error,
+                    type: "error"
+                }) 
             }
         },
         async deleteCat(id) {
             try {
                 await this.deleteCategoryAction(id);
+
+                this.showTooltip({
+                    text: "Категория успешно удалена",
+                    type: "success"
+                })
             } catch (error) {
-                console.log(error.message); 
+                this.showTooltip({
+                    text: error.response.data.error,
+                    type: "error"
+                })
             }            
         },
         async editCat(title, category) {
