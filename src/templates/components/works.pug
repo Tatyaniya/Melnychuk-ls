@@ -9,12 +9,13 @@ script(type="text/x-template")#works-container
         info(
             :currentWork="currentWork"
         )
+
         
 script(type="text/x-template")#works-display
     .works-slider
         .works-slider__pic-wrap(:data-slide="currentIndex + 1")
             .works-slider__pic
-                img(:src="currentWork.photo").works-slider__fullpic
+                img(:src="`https://webdev-api.loftschool.com/${currentWork.photo}`").works-slider__fullpic
         thumbs(
             :works="reversedWorks"
             :currentWork="currentWork"
@@ -30,7 +31,7 @@ script(type="text/x-template")#works-thumbs
             :class="{active: currentWork.id === slide.id}"
             )
             .works-slider__link
-                img(:src="slide.photo").works-slider__img
+                img(:src="`https://webdev-api.loftschool.com/${slide.photo}`").works-slider__img
 
 script(type="text/x-template")#works-btns
     .works-slider__buttons
@@ -46,14 +47,15 @@ script(type="text/x-template")#works-btns
 script(type="text/x-template")#works-info
     .works-data
         tags(
-            :tags="tagsArray"
+           // :tags="tagsArray"
         )
         .works-data__subtitle {{currentWork.title}}
         .works-data__text
-            p {{currentWork.desc}}
+            p {{currentWork.description}}
         .view-site
             +icon('link', 'view-site__icon')
-            a(href="//loftschool.com").view-site__link&attributes({'target': '_blank'}) Посмотреть сайт
+            a(href="`${currentWork.link}`").view-site__link&attributes({'target': '_blank'}) Посмотреть сайт
+            
 
 script(type="text/x-template")#works-tags
     ul.works-data__tags

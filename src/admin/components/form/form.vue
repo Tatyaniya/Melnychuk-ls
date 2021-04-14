@@ -78,13 +78,31 @@ export default {
     methods: {
             ...mapActions({
             addNewWork: "works/add",
+            showTooltip: "tooltips/show"
         }),
         handleDragOver(e) {
             e.preventDefault();
             this.hovered = true;
         },
         async handleSubmit() {
-            await this.addNewWork(this.newWork);
+            try {
+                await this.addNewWork(this.newWork);
+                this.showTooltip({
+                    text: "Работа успешно добавлена",
+                    type: "success"
+                });
+                this.newWork.title = "";
+                this.newWork.link = "";
+                this.newWork.description = "";
+                this.newWork.techs = "";
+                this.newWork.photo = {};
+                this.newWork.preview = "";
+            } catch (error) {
+                this.showTooltip({
+                    text: error.response.data.error,
+                    type: "error"
+                })
+            }
         },
         handleChange(event) {
             event.preventDefault();

@@ -35,12 +35,35 @@ export default {
             getWorks: "works/get",
             removeWork: "works/remove",
             editWork: "works/edit",
+            showTooltip: "tooltips/show"
         }),
         remove(currentWork) {
-            this.removeWork(currentWork.id);
+            try {
+                this.removeWork(currentWork.id);
+                this.showTooltip({
+                    text: "Работа успешно удалена",
+                    type: "success"
+                })
+            } catch (error) {
+                this.showTooltip({
+                    text: error.response.data.error,
+                    type: "error"
+                })
+            }
         },
         edit(currentWork) {
-            this.editWork(currentWork);
+            try {
+                this.editWork(currentWork);
+                this.showTooltip({
+                    text: "Работа успешно изменена",
+                    type: "success"
+                })
+            } catch (error) {
+                this.showTooltip({
+                    text: error.response.data.error,
+                    type: "error"
+                })
+            }
         }
     },
     mounted() {

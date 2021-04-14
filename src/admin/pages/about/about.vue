@@ -62,6 +62,7 @@ export default {
             addSkillAction: "skills/add",
             editSkillAction: "skills/edit",
             removeSkillAction: "skills/remove",
+            showTooltip: "tooltips/show"
         }),
         async createSkill(skill, categoryId) {
             const newSkill = {
@@ -90,10 +91,11 @@ export default {
             }
         },
         async deleteCat(id) {
-            await this.deleteCategoryAction(id);
-            this.categories = this.getCategoriesAction();
-
-            return this.categories;            
+            try {
+                await this.deleteCategoryAction(id);
+            } catch (error) {
+                console.log(error.message); 
+            }            
         },
         async editCat(title, category) {
             console.log(title);
