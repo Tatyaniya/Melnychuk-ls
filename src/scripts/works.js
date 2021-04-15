@@ -31,7 +31,7 @@ const tags = {
 }
 
 const info = {
-    props: ["currentWork"],
+    props: ["currentWork", "tagsArray"],
     template: "#works-info",
     components: {tags},
     computed: {
@@ -57,7 +57,7 @@ new Vue({
     computed: {
         currentWork() {
             return this.works[0];
-        }
+        },
     },
     watch: {
         currentIndex(value) {
@@ -69,13 +69,6 @@ new Vue({
             const worksNumber = this.works.length - 1;
             if (index < 0) this.currentIndex = worksNumber;
             if (index > worksNumber) this.currentIndex = 0;
-        },
-        requireImagesToArray(data) {
-            return data.map(item => {
-                const requireImage = require(`../images/works/${item.photo}`).default;
-                item.photo = requireImage;
-                return item;
-            })
         },
         slide(direction) {
             const lastItem = this.works[this.works.length - 1];
@@ -96,12 +89,9 @@ new Vue({
     async created() {
         const { data } = await axios.get("/works/454");
         this.works = data;
-        console.log(this.works);
+        
         this.works.forEach(work => {
             console.log(work.techs);
         })
-        
-        //this.works = this.requireImagesToArray(data);
     }
 });
-

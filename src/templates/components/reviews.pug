@@ -5,7 +5,7 @@ script(type="text/x-template")#reviews-container
             .reviews__buttons
                 button.reviews__btn.reviews__btn_prev(type="button" @click="prev" :disabled="!hasPrev")
                 button.reviews__btn.reviews__btn_next(type="button" @click="next" :disabled="!hasNext")
-        .reviews__slider
+        .reviews__slider(v-if="reviews.length")
             flickity(ref="flickity" :options="flickityOptions").reviews__slider-items
                 .reviews__slider-item(v-for="(review, index) in reviews" :key="index")
                     .quote
@@ -13,7 +13,7 @@ script(type="text/x-template")#reviews-container
                             p {{review.text}}
                         .quote__author
                             .quote__avatar
-                                img(:src="review.pic", alt="avatar").quote__avatar-pic
+                                img(:src="review.photo", alt="avatar").quote__avatar-pic
                             .quote__info
-                                .quote__name {{review.name}}
+                                .quote__name {{review.author}}
                                 .quote__occ {{review.occ}}

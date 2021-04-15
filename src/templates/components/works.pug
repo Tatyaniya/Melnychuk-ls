@@ -12,7 +12,7 @@ script(type="text/x-template")#works-container
 
         
 script(type="text/x-template")#works-display
-    .works-slider
+    .works-slider(v-if="works.length")
         .works-slider__pic-wrap(:data-slide="currentIndex + 1")
             .works-slider__pic
                 img(:src="`https://webdev-api.loftschool.com/${currentWork.photo}`").works-slider__fullpic
@@ -45,8 +45,7 @@ script(type="text/x-template")#works-btns
         ).works-slider__btn.works-slider__btn_prev
 
 script(type="text/x-template")#works-info
-    .works-data
-        tags(
+    .works-data(
             //:tags="tagsArray"
         )
         .works-data__subtitle {{currentWork.title}}
