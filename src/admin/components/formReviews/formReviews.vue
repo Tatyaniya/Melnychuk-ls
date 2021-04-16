@@ -1,9 +1,8 @@
 <template lang="pug">
     .form-reviews-component
         form.form(@submit.prevent="handleSubmit")
-            card(title="Новый отзыв")
-            .form-container
-                slot(name="content")
+            card(title="Новый отзыв" slot="content")
+                .form-container(slot="content")
                     .form-data
                         .upload-image
                             label(
