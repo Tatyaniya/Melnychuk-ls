@@ -19,7 +19,7 @@
                 icon(
                     symbol="trash" 
                     title="Удалить" 
-                    
+                    @click="$emit('remove', currentReview)"
                 )
 </template>
 

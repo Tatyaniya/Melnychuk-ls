@@ -10,7 +10,7 @@
                         reviewCard(
                             :review="review"
                             @edit="edit"
-                            @remove="remove"
+                            @remove="remove(review.id)"
                         )
 </template>
 
@@ -36,9 +36,9 @@ export default {
             editReview: "reviews/edit",
             showTooltip: "tooltips/show"
         }),
-        remove(currentReviews) {
+        remove(currentReviewId) {
             try {
-                this.removeReview(currentReview.id);
+                this.removeReview(currentReviewId);
                 this.showTooltip({
                     text: "Отзыв успешно удален",
                     type: "success"

@@ -30,11 +30,7 @@ export default {
             Object.keys(newWork).forEach(item => {
                 formData.append(item, newWork[item]);
             })
-
-            // for (let entry of formData.entries()) {
-            //     console.log(entry);
-            // }
-    
+            
             try {
                 const { data } = await this.$axios.post("/works", formData);
                 commit("ADD_WORK", data);

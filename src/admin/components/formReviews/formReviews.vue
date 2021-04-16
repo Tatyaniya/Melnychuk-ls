@@ -77,7 +77,7 @@ export default {
             try {
                 await this.addNewReview(this.newReview);
                 this.showTooltip({
-                    text: "Работа успешно добавлена",
+                    text: "Отзыв успешно добавлен",
                     type: "success"
                 });
                 this.newReview.author = "";
