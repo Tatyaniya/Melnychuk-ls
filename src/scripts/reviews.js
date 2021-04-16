@@ -25,16 +25,10 @@ new Vue({
         }
     },
     async created() {
-        // const { data } = await axios.get("/reviews/454");
+        const { data } = await axios.get("/reviews/454");
         
-        // this.reviews = data.map(review => {
-        //     review.photo = `https://webdev-api.loftschool.com/${review.photo}`;
-        //     return review;
-        // });
-
-        const reviews = require("../data/reviews.json");
-        this.reviews = reviews.map(review => {
-            review.pic = require(`../images/content/${review.pic}`).default;
+        this.reviews = data.map(review => {
+            review.photo = `https://webdev-api.loftschool.com/${review.photo}`;
             return review;
         });
     },

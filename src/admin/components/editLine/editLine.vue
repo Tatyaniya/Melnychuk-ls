@@ -37,7 +37,7 @@ import {Validator} from 'simple-vue-validator';
 export default {
     mixin: [require('simple-vue-validator').mixin],
     validators: {
-        title: (value) => {
+        "title": (value) => {
             return Validator.value(value).required('Заполните поле');
         }
     },

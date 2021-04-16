@@ -39,7 +39,7 @@ export default {
                 const { data } = await this.$axios.post("/works", formData);
                 commit("ADD_WORK", data);
             } catch (error) {
-                console.log("error");
+                throw new Error('Ошибка добавления работы');
             }
         },
         async get({commit}) {
@@ -47,7 +47,7 @@ export default {
                 const { data } = await this.$axios.get("/works/454");
                 commit("SET_WORKS", data);
             } catch (error) {
-                console.log("error");
+                throw new Error('Ошибка получения работ');
             }
         },
         async remove(store, id) {
