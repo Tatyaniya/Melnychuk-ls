@@ -74,6 +74,22 @@ export default {
 </script>
 
 <style scoped lang="postcss">
+.page-content {
+  padding: 60px 0 20px;
+  background: url("../../../images/bg/admin.jpg") center center / cover no-repeat;
+  flex: 1;
+}
+
+.header {
+  margin-bottom: 60px;
+}
+
+.title {
+  font-size: 21px;
+  font-weight: bold;
+  color: $text-dark;
+}
+
 .cards {
     display: flex;
     flex-wrap: wrap;

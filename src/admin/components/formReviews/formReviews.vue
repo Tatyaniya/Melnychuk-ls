@@ -1,6 +1,6 @@
 <template lang="pug">
     .form-reviews-component
-        form.form( @submit.prevent="handleSubmit")
+        form.form(@submit.prevent="handleSubmit")
             card(title="Новый отзыв")
             .form-container
                 slot(name="content")
