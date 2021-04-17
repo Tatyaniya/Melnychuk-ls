@@ -2,7 +2,7 @@
     .tags-adder-components 
         addInput(
             title="Добавление тега"
-            v-model="currentTags"
+            :value="currentTags"
             @input="$emit('change', currentTags)"
         )
         ul.tags
@@ -40,6 +40,11 @@ export default {
     data() {
         return {
             currentTags: this.tags
+        }
+    },
+    watch: {
+        tags() {
+            this.currentTags = this.tags;
         }
     },
     computed: {

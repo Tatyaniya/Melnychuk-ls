@@ -74,7 +74,7 @@ router.beforeEach(async (to, from, next) => {
             try {
                 const response = await $axios.get('/user');
 
-                store.commit("user/SET_USER", response.user.user);
+                store.commit("user/SET_USER", response.data.user);
 
                 console.warn('[строка 79] The user\'s object was successfully fetched', from.path);
 
@@ -86,9 +86,9 @@ router.beforeEach(async (to, from, next) => {
 
                 next();
                 
-                // localStorage.removeItem('token');
+                localStorage.removeItem('token');
 
-                // next('/login');
+                next('/login');
             }
         } else {
             console.warn('[строка 92] token was not found in localStorage');

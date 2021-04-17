@@ -34,16 +34,9 @@ const info = {
     props: ["currentWork", "tagsArray"],
     template: "#works-info",
     components: {tags},
-    // computed: {
-    //     tagsArray() {
-    //         return this.currentWork.techs.split(",");
-    //     }
-    // },
-    watch: {
-        tags() {
-            if(tags) {
-                return this.currentWork.techs.split(",");
-            }
+    computed: {
+        tagsArray() {
+            return this.currentWork.techs.split(",");
         }
     }
 }

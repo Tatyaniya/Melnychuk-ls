@@ -67,9 +67,8 @@ export default {
         },
         async getCats(store) {
             try {
-                // const userId = await store.rootState.user.user.id;
-                // const response = await this.$axios.get(`/categories/${userId}`);
-                const response = await this.$axios.get('/categories/454');
+                const userId = await store.rootState.user.user.id;
+                const response = await this.$axios.get(`/categories/${userId}`);
                 store.commit('SET_CATEGORIES', response.data);
             } catch (error) {
                 throw new Error('Ошибка добавления категории');
@@ -83,10 +82,9 @@ export default {
                 throw new Error('Ошибка удаления категории');
             }
         },
-        async editCat(store, title, category) {
+        async editCat(store, category) {
             try {
-                const response = await this.$axios.post(`/categories/${category.id}`, {title: title});
-                console.log(response.data);
+                const response = await this.$axios.post(`/categories/${category.id}`, {title: category.title});
                 store.commit('EDIT_CATEGORY', response.data);
             } catch (error) {
                 throw new Error('Ошибка редактирования категории');

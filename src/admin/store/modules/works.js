@@ -38,10 +38,11 @@ export default {
                 throw new Error('Ошибка добавления работы');
             }
         },
-        async get({commit}) {
+        async get(store) {
             try {
-                const { data } = await this.$axios.get("/works/454");
-                commit("SET_WORKS", data);
+                const userId = await store.rootState.user.user.id;
+                const { data } = await this.$axios.get(`/works/${userId}`);
+                store.commit("SET_WORKS", data);
             } catch (error) {
                 throw new Error('Ошибка получения работ');
             }
@@ -54,10 +55,16 @@ export default {
                 throw new Error('Ошибка удаления работы');
             }
         },
-        async edit(store, work) {
+        async edit({ commit }, work) {
+            const formData = new FormData();
+                
+            Object.keys(work).forEach(item => {
+                formData.append(item, work[item]);
+            })
+            
             try {
-                const response = await this.$axios.post(`/work/${work.id}`, work);
-                store.commit('EDIT_WORK', response.data.work);
+                const { data } = await this.$axios.post(`/works/${work.id}`, work);
+                commit("ADD_WORK", data);
             } catch (error) {
                 throw new Error('Ошибка редактирования работы');
             }

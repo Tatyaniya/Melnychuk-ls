@@ -29,10 +29,11 @@ export default {
                 throw new Error('Ошибка добавления отзыва');
             }
         },
-        async get(state) {
+        async get(store) {
             try {
-                const response = await this.$axios.get("/reviews/454");
-                state.commit("SET_REVIEWS", response.data);
+                const userId = await store.rootState.user.user.id;
+                const response = await this.$axios.get(`/reviews/${userId}`);
+                store.commit("SET_REVIEWS", response.data);
             } catch (error) {
                 throw new Error('Ошибка получения отзывов');
             }

@@ -86,8 +86,6 @@ export default {
                     type: "error"
                 })
             }
-
-            
         },
         async editSkill(skill) {
             try {
@@ -105,9 +103,9 @@ export default {
                 })
             }
         },
-        removeSkill(skill) {
+        async removeSkill(skill) {
             try {
-                this.removeSkillAction(skill);
+                await this.removeSkillAction(skill);
                
                 this.showTooltip({
                     text: "Навык успешно удален",
@@ -152,14 +150,26 @@ export default {
             }            
         },
         async editCat(title, category) {
-            console.log(title);
-            await this.editCategoryAction(title, category);
-            this.editmode = false;
+            try {
+                category.title = title;
+                await this.editCategoryAction(category);
+                this.editmode = false;
+
+                this.showTooltip({
+                    text: "Категория успешно изменена",
+                    type: "success"
+                })
+            } catch (error) {
+                this.showTooltip({
+                    text: error.response.data.error,
+                    type: "error"
+                })
+            }
         }
     },
     created() {
         this.getUserAction();
-        this.categories = this.getCategoriesAction();
+        this.getCategoriesAction();
     },
 };
 

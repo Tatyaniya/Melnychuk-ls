@@ -51,7 +51,7 @@ export default {
                 })
             }
         },
-        edit(currentWork) {
+        edit(currentReview) {
             try {
                 this.editReview(currentReview);
                 this.showTooltip({

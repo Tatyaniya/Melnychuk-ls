@@ -62,29 +62,58 @@ export default {
         appInput, 
         tagsAdder 
     },
+    props: {
+        currentWork: {
+            type: Object | null,
+            default: null
+        }
+    },
     data() {
         return {
-        hovered: false,
-        newWork: {
-            title: "",
-            link: "",
-            description: "",
-            techs: "",
-            photo: {},
-            preview: "",
-        },
+            hovered: false,
+            newWork: {
+                title: "",
+                link: "",
+                description: "",
+                techs: "",
+                photo: {},
+                preview: "",
+            },
         };
+    },
+    watch: {
+        currentWork() {
+            this.setWork();
+        }
+    },
+    created() {
+        this.setWork();
     },
     methods: {
             ...mapActions({
             addNewWork: "works/add",
+            editWork: "works/edit",
             showTooltip: "tooltips/show"
         }),
         handleDragOver(e) {
             e.preventDefault();
             this.hovered = true;
         },
-        async handleSubmit() {
+        setWork() {
+            if(this.currentWork) {
+                this.newWork = { ...this.currentWork };
+            } else {
+                this.newWork = {
+                    title: "",
+                    link: "",
+                    description: "",
+                    techs: "",
+                    photo: {},
+                    preview: "",
+                }
+            }
+        },
+        async createWork() {
             try {
                 await this.addNewWork(this.newWork);
                 this.showTooltip({
@@ -102,6 +131,27 @@ export default {
                     text: error.response.data.error,
                     type: "error"
                 })
+            }
+        },
+        async updateWork(currentWork) {
+            try {
+                await this.editWork(currentWork);
+                this.showTooltip({
+                    text: "Работа успешно изменена",
+                    type: "success"
+                });
+            } catch (error) {
+                this.showTooltip({
+                    text: error.response.data.error,
+                    type: "error"
+                })
+            }
+        },
+        handleSubmit() {
+            if(!this.newWork.id) {
+                this.createWork();
+            } else {
+                this.updateWork(this.currentWork);
             }
         },
         handleChange(event) {
@@ -130,4 +180,4 @@ export default {
 };
 </script>
 
-<style src="./form.pcss" lang="postcss" scoped></style>
+<style src="./formWorks.pcss" lang="postcss" scoped></style>

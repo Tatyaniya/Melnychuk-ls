@@ -21,7 +21,7 @@
       </div>
       <div class="buttons">
         <div class="button-icon">
-          <icon symbol="tick" @click="$emit('approve', title)"></icon>
+          <icon symbol="tick" @click="onApprove"></icon>
         </div>
         <div class="button-icon">
           <icon symbol="cross" @click="$emit('remove', $event)"></icon>
@@ -62,12 +62,9 @@ export default {
     methods: {
         onApprove() {
             this.$validate().then(success => {
-                if (!success) {
-                    return;
-                } else if (this.title.trim() === this.value.trim()) {
-                    this.editmode = false;
-                } else {
+                if (success) {
                     this.$emit("approve", this.value);
+                    this.editmode = false;
                 }
             })          
         }

@@ -5,7 +5,7 @@
                 .header
                     .title Блок "{{this.$route.meta.title}}"
                 .form
-                    appForm
+                    formWorks(:currentWork="currentWork")
                 ul.cards
                     li.item(v-for="work in works" :key="work.id")
                         workCard(
@@ -16,14 +16,19 @@
 </template>
 
 <script>
-import appForm from "../../components/form";
+import formWorks from "../../components/formWorks";
 import workCard from "../../components/workCard";
 import { mapState, mapActions } from "vuex";
 
 export default {
     components: { 
-        appForm, 
+        formWorks, 
         workCard 
+    },
+    data() {
+        return {
+            currentWork: null
+        }
     },
     computed: {
         ...mapState("works", {
@@ -37,9 +42,9 @@ export default {
             editWork: "works/edit",
             showTooltip: "tooltips/show"
         }),
-        remove(currentWork) {
+        async remove(currentWork) {
             try {
-                this.removeWork(currentWork.id);
+                await this.removeWork(currentWork.id);
                 this.showTooltip({
                     text: "Работа успешно удалена",
                     type: "success"
@@ -51,19 +56,8 @@ export default {
                 })
             }
         },
-        edit(currentWork) {
-            try {
-                this.editWork(currentWork);
-                this.showTooltip({
-                    text: "Работа успешно изменена",
-                    type: "success"
-                })
-            } catch (error) {
-                this.showTooltip({
-                    text: error.response.data.error,
-                    type: "error"
-                })
-            }
+        async edit(currentWork) {
+            this.currentWork = { ...currentWork };
         }
     },
     mounted() {
