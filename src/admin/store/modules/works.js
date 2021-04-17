@@ -63,7 +63,7 @@ export default {
             })
             
             try {
-                const { data } = await this.$axios.post(`/works/${work.id}`, work);
+                const { data } = await this.$axios.post(`/works/${work.id}`, formData);
                 commit("ADD_WORK", data);
             } catch (error) {
                 throw new Error('Ошибка редактирования работы');

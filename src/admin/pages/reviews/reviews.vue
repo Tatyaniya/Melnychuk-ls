@@ -5,7 +5,7 @@
                 .header
                     .title Блок "{{this.$route.meta.title}}"
                 .form
-                    formReviews
+                    formReviews(:currentReview="currentReview")
                 ul.cards
                     li.item(v-for="review in reviews" :key="review.id")
                         reviewCard(
@@ -24,6 +24,11 @@ export default {
     components: { 
         formReviews, 
         reviewCard 
+    },
+    data() {
+        return {
+            currentReview: null
+        }
     },
     computed: {
         ...mapState("reviews", {
@@ -52,18 +57,7 @@ export default {
             }
         },
         edit(currentReview) {
-            try {
-                this.editReview(currentReview);
-                this.showTooltip({
-                    text: "Отзыв успешно изменен",
-                    type: "success"
-                })
-            } catch (error) {
-                this.showTooltip({
-                    text: error.response.data.error,
-                    type: "error"
-                })
-            }
+            this.currentReview = { ...currentReview };
         }
     },
     mounted() {

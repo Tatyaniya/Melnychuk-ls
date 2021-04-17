@@ -56,8 +56,9 @@ export default {
                 })
             }
         },
-        async edit(currentWork) {
+        edit(currentWork) {
             this.currentWork = { ...currentWork };
+            //this.editWork(currentWork);
         }
     },
     mounted() {

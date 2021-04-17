@@ -51,6 +51,12 @@ export default {
         appButton, 
         appInput
     },
+    props: {
+        currentReview: {
+            type: Object | null,
+            default: null
+        }
+    },
     data() {
         return {
             hovered: false,
@@ -63,16 +69,38 @@ export default {
             },
         };
     },
+    watch: {
+        currentReview() {
+            this.setReview();
+        }
+    },
+    created() {
+        this.setReview();
+    },
     methods: {
             ...mapActions({
             addNewReview: "reviews/add",
+            editReview: "reviews/edit",
             showTooltip: "tooltips/show"
         }),
+        setReview() {
+            if(this.currentReview) {
+                this.newReview = { ...this.currentReview };
+            } else {
+                this.newReview = {
+                author: "",
+                occ: "",
+                text: "",
+                photo: {},
+                preview: "",
+            }
+            }
+        },
         handleDragOver(e) {
             e.preventDefault();
             this.hovered = true;
         },
-        async handleSubmit() {
+        async createReview() {
             try {
                 await this.addNewReview(this.newReview);
                 this.showTooltip({
@@ -90,6 +118,16 @@ export default {
                     text: error.response.data.error,
                     type: "error"
                 })
+            }
+        },
+        async updateReview(review) {
+            this.editReview(review);
+        },
+        async handleSubmit() {
+            if(!this.newReview.id) {
+                this.createReview();
+            } else {
+                this.updateReview(this.newReview);
             }
         },
         handleChange(event) {

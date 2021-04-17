@@ -13,6 +13,15 @@ export default {
         REMOVE_REVIEW(state, id) {
             state.reviews = state.reviews.filter(review => review.id !== id);
         },
+        EDIT_REVIEW(state, reviewEdited) {
+            state.reviews = state.reviews.map(review => {
+                if(review.id === reviewEdited.id) {
+                    review = reviewEdited;
+                }
+
+                return review;
+            });
+        }
     },
     actions: {
         async add({ commit }, newReview) {
@@ -46,8 +55,19 @@ export default {
                 throw new Error('Ошибка удаления отзыва');
             }
         },
-        edit() {
+        async edit({ commit }, review) {
+            const formData = new FormData();
+                
+            Object.keys(review).forEach(item => {
+                formData.append(item, review[item]);
+            })
             
+            try {
+                const { data } = await this.$axios.post(`/works/${review.id}`, formData);
+                commit("ADD_WORK", data);
+            } catch (error) {
+                throw new Error('Ошибка редактирования работы');
+            }
         }
     }
 }

@@ -14,7 +14,7 @@
                 icon(
                     symbol="pencil" 
                     title="Править" 
-                    
+                    @click="$emit('edit', currentReview)"
                 )
                 icon(
                     symbol="trash" 
