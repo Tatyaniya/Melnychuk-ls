@@ -55,6 +55,7 @@ import appButton from "../button";
 import appInput from "../input";
 import tagsAdder from "../tagsAdder";
 import { mapActions } from "vuex";
+
 export default {
     components: { 
         card, 
@@ -113,9 +114,9 @@ export default {
                 }
             }
         },
-        async createWork() {
+        async createWork(newWork) {
             try {
-                await this.addNewWork(this.newWork);
+                await this.addNewWork(newWork);
                 this.showTooltip({
                     text: "Работа успешно добавлена",
                     type: "success"
@@ -149,7 +150,7 @@ export default {
         },
         handleSubmit() {
             if(!this.newWork.id) {
-                this.createWork();
+                this.createWork(this.newWork);
             } else {
                 this.updateWork(this.currentWork);
             }

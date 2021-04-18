@@ -25,18 +25,19 @@ export default {
     },
     actions: {
         async add({ commit }, newWork) {
-            const formData = new FormData();
+            console.log(newWork);
+            // const formData = new FormData();
                 
-            Object.keys(newWork).forEach(item => {
-                formData.append(item, newWork[item]);
-            })
+            // Object.keys(newWork).forEach(item => {
+            //     formData.append(item, newWork[item]);
+            // })
             
-            try {
-                const { data } = await this.$axios.post("/works", formData);
-                commit("ADD_WORK", data);
-            } catch (error) {
-                throw new Error('Ошибка добавления работы');
-            }
+            // try {
+            //     const { data } = await this.$axios.post("/works", formData);
+            //     commit("ADD_WORK", data);
+            // } catch (error) {
+            //     throw new Error('Ошибка добавления работы');
+            // }
         },
         async get(store) {
             try {

@@ -14,8 +14,9 @@ script(type="text/x-template")#works-container
 script(type="text/x-template")#works-display
     .works-slider
         .works-slider__pic-wrap(:data-slide="currentIndex + 1")
-            .works-slider__pic
-                img(:src="`https://webdev-api.loftschool.com/${currentWork.photo}`").works-slider__fullpic
+            transition(name="display")
+                .works-slider__pic
+                    img(:src="`https://webdev-api.loftschool.com/${currentWork.photo}`").works-slider__fullpic
         thumbs(
             :works="reversedWorks"
             :currentWork="currentWork"
@@ -25,7 +26,11 @@ script(type="text/x-template")#works-display
         )
         
 script(type="text/x-template")#works-thumbs
-    ul.works-slider__thumbs
+    transition-group.works-slider__thumbs(
+        tag="ul"
+        css="false"
+        @enter="enterCb"
+        )
         li.works-slider__item(
             v-for="slide in works" :key="slide.id"
             :class="{active: currentWork.id === slide.id}"

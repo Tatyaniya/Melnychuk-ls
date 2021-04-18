@@ -121,13 +121,13 @@ export default {
             }
         },
         async updateReview(review) {
-            this.editReview(review);
+            await this.editReview(review);
         },
         async handleSubmit() {
             if(!this.newReview.id) {
                 this.createReview();
             } else {
-                this.updateReview(this.newReview);
+                this.updateReview(this.currentReview);
             }
         },
         handleChange(event) {
