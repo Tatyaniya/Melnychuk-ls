@@ -43,7 +43,8 @@ export default {
                 title: this.work.title,
                 description: this.work.description,
                 link: this.work.link,
-                techs: this.work.techs
+                techs: this.work.techs,
+                preview: `https://webdev-api.loftschool.com/${this.work.photo}`
             }
         }
     },

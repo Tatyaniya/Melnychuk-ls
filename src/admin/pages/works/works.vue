@@ -58,7 +58,6 @@ export default {
         },
         edit(currentWork) {
             this.currentWork = { ...currentWork };
-            this.editWork(currentWork);
         }
     },
     mounted() {

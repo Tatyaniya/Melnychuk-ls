@@ -41,7 +41,8 @@ export default {
                 id: this.review.id,
                 author: this.review.author,
                 occ: this.review.occ,
-                text: this.review.text
+                text: this.review.text,
+                preview: `https://webdev-api.loftschool.com/${this.review.photo}`
             }
         }
     },
@@ -49,7 +50,7 @@ export default {
         cover() {
             return `https://webdev-api.loftschool.com/${this.review.photo}`
         }
-    },
+    }
 };
 </script>
 

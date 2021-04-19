@@ -1,52 +1,52 @@
 <template>
-  <div class="form-component">
-    <form class="form" @submit.prevent="handleSubmit">
-      <card title="Добавление работы">
-        <div class="form-container" slot="content">
-          <div class="form-cols">
-            <div class="form-col">
-              <label
-                :style="{backgroundImage: `url(${newWork.preview})`}"
-                :class="[ 'uploader', {active: newWork.preview}, {
-                  hovered: hovered
-                }]"
-                @dragover="handleDragOver"
-                @dragleave="hovered = false"
-                @drop="handleChange"
-              >
-                <div class="uploader-title">Перетащите или загрузите картинку</div>
-                <div class="uploader-btn">
-                  <app-button typeAttr="file" @change="handleChange"></app-button>
+    <div class="form-component">
+        <form class="form" @submit.prevent="handleSubmit">
+        <card title="Добавление работы">
+            <div class="form-container" slot="content">
+            <div class="form-cols">
+                <div class="form-col">
+                <label
+                    :style="{backgroundImage: `url(${newWork.preview})`}"
+                    :class="[ 'uploader', {active: newWork.preview}, {
+                    hovered: hovered
+                    }]"
+                    @dragover="handleDragOver"
+                    @dragleave="hovered = false"
+                    @drop="handleChange"
+                >
+                    <div class="uploader-title">Перетащите или загрузите картинку</div>
+                    <div class="uploader-btn">
+                    <app-button typeAttr="file" @change="handleChange"></app-button>
+                    </div>
+                </label>
                 </div>
-              </label>
+                <div class="form-col">
+                <div class="form-row">
+                    <app-input v-model="newWork.title" title="Название" />
+                </div>
+                <div class="form-row">
+                    <app-input v-model="newWork.link" title="Ссылка" />
+                </div>
+                <div class="form-row">
+                    <app-input v-model="newWork.description" field-type="textarea" title="Описание" />
+                </div>
+                <div class="form-row">
+                    <tags-adder v-model="newWork.techs" />
+                </div>
+                </div>
             </div>
-            <div class="form-col">
-              <div class="form-row">
-                <app-input v-model="newWork.title" title="Название" />
-              </div>
-              <div class="form-row">
-                <app-input v-model="newWork.link" title="Ссылка" />
-              </div>
-              <div class="form-row">
-                <app-input v-model="newWork.description" field-type="textarea" title="Описание" />
-              </div>
-              <div class="form-row">
-                <tags-adder v-model="newWork.techs" />
-              </div>
+            <div class="form-btns">
+                <div class="btn cancel">
+                <app-button title="Отмена" plain></app-button>
+                </div>
+                <div class="btn">
+                <app-button title="Сохранить"></app-button>
+                </div>
             </div>
-          </div>
-          <div class="form-btns">
-            <div class="btn cancel">
-              <app-button title="Отмена" plain></app-button>
             </div>
-            <div class="btn">
-              <app-button title="Сохранить"></app-button>
-            </div>
-          </div>
-        </div>
-      </card>
-    </form>
-  </div>
+        </card>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -137,6 +137,12 @@ export default {
         async updateWork(currentWork) {
             try {
                 await this.editWork(currentWork);
+                this.newWork.title = "";
+                this.newWork.link = "";
+                this.newWork.description = "";
+                this.newWork.techs = "";
+                this.newWork.photo = {};
+                this.newWork.preview = "";
                 this.showTooltip({
                     text: "Работа успешно изменена",
                     type: "success"
@@ -152,7 +158,7 @@ export default {
             if(!this.newWork.id) {
                 this.createWork(this.newWork);
             } else {
-                this.updateWork(this.currentWork);
+                this.updateWork(this.newWork);
             }
         },
         handleChange(event) {

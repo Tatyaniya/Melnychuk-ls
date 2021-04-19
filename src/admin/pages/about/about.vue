@@ -106,7 +106,6 @@ export default {
         async removeSkill(skill) {
             try {
                 await this.removeSkillAction(skill);
-               
                 this.showTooltip({
                     text: "Навык успешно удален",
                     type: "success"

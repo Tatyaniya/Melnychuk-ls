@@ -110,7 +110,6 @@ export default {
                 this.newReview.author = "";
                 this.newReview.occ = "";
                 this.newReview.text = "";
-                this.newReview.techs = "";
                 this.newReview.photo = {};
                 this.newReview.preview = "";
             } catch (error) {
@@ -127,7 +126,7 @@ export default {
             if(!this.newReview.id) {
                 this.createReview();
             } else {
-                this.updateReview(this.currentReview);
+                this.updateReview(this.newReview);
             }
         },
         handleChange(event) {

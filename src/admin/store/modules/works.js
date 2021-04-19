@@ -15,8 +15,8 @@ export default {
         },
         EDIT_WORK(state, workEdited) {
             state.works = state.works.map(work => {
-                if(work.id === workEdited.id) {
-                    work = workEdited;
+                if(work.id == workEdited.work.id) {
+                    work = workEdited.work;
                 }
 
                 return work;
@@ -64,7 +64,7 @@ export default {
             
             try {
                 const { data } = await this.$axios.post(`/works/${work.id}`, formData);
-                commit("ADD_WORK", data);
+                commit("EDIT_WORK", data);
             } catch (error) {
                 throw new Error('Ошибка редактирования работы');
             }

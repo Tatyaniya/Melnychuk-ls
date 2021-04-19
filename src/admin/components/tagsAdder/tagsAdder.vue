@@ -3,7 +3,7 @@
         addInput(
             title="Добавление тега"
             :value="currentTags"
-            @input="$emit('change', currentTags)"
+            @input="inputTags"
         )
         ul.tags
             li.tag(
@@ -63,6 +63,9 @@ export default {
             this.currentTags = tags.join(", ");
 
             this.$emit('change', this.currentTags);
+        },
+        inputTags(val) {
+            this.$emit('change', val);
         }
     }
 }

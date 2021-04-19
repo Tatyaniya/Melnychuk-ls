@@ -15,8 +15,8 @@ export default {
         },
         EDIT_REVIEW(state, reviewEdited) {
             state.reviews = state.reviews.map(review => {
-                if(review.id === reviewEdited.id) {
-                    review = reviewEdited;
+                if(review.id === reviewEdited.review.id) {
+                    review = reviewEdited.review;
                 }
 
                 return review;
@@ -63,8 +63,8 @@ export default {
             })
             
             try {
-                const { data } = await this.$axios.post(`/works/${review.id}`, formData);
-                commit("ADD_REVIEW", data);
+                const { data } = await this.$axios.post(`/reviews/${review.id}`, formData);
+                commit("EDIT_REVIEW", data);
             } catch (error) {
                 throw new Error('Ошибка редактирования работы');
             }
