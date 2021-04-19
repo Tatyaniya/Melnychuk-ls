@@ -54,9 +54,7 @@ export default {
     },
     methods: {
         async handleClick() {
-            if(await !this.$validate()) {
-                return;
-            } else {
+            if(await this.$validate()) {
                 this.$emit('approve', this.skill);
             }
         }
