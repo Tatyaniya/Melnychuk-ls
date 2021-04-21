@@ -1,14 +1,22 @@
+.form-component {
+    margin-bottom: 30px;
+}
 .form-cols {
   display: flex;
 }
 
 .form-col {
-  width: 50%;
-  margin-right: 30px;
+    width: 50%;
+    margin-right: 30px;
 
-  &:last-child {
-    margin-right: 0;
-  }
+    &:last-child {
+        margin-right: 0;
+    }
+
+    & .input-message {
+        border: none;
+        height: 0;
+    }
 }
 
 .uploader {
@@ -60,4 +68,13 @@
   &:last-child {
     margin-right: 0;
   }
+}
+
+.btn.cancel>button {
+    color: $dark-grey;
+    transition: all 0.4s ease;
+
+    &:hover {
+        color: rgba($dark-grey, 0.7);
+    }
 }

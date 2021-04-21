@@ -4,9 +4,19 @@
             .container
                 .header
                     .title Блок "{{this.$route.meta.title}}"
-                .form
-                    formReviews(:currentReview="currentReview")
                 ul.cards
+                    li.li-form(v-if="emptyCardIsShown")
+                        formReviews(
+                            :currentReview="currentReview"
+                            @close="closeHandler"
+                            )
+                    li.item.empty-work(v-else)
+                        square-btn(
+                            v-if="emptyCardIsShown == false"
+                            type="square"
+                            title="Добавить отзыв"
+                            @click="emptyCardIsShown = true"
+                        )
                     li.item(v-for="review in reviews" :key="review.id")
                         reviewCard(
                             :review="review"
@@ -18,15 +28,18 @@
 <script>
 import formReviews from "../../components/formReviews";
 import reviewCard from "../../components/reviewCard";
+import squareBtn from "../../components/button/button";
 import { mapState, mapActions } from "vuex";
 
 export default {
     components: { 
         formReviews, 
-        reviewCard 
+        reviewCard,
+        squareBtn
     },
     data() {
         return {
+            emptyCardIsShown:false,
             currentReview: null
         }
     },
@@ -58,6 +71,18 @@ export default {
         },
         edit(currentReview) {
             this.currentReview = { ...currentReview };
+             this.emptyCardIsShown = true;
+        },
+        closeHandler(){
+            console.log('here');
+            this.emptyCardIsShown = false;
+        }
+    },
+     watch: {
+        emptyCardIsShown(){
+            if(!this.emptyCardIsShown){
+                this.currentReview = null
+            }
         }
     },
     mounted() {
@@ -72,7 +97,6 @@ export default {
   background: url("../../../images/bg/admin.jpg") center center / cover no-repeat;
   flex: 1;
 }
-
 .header {
   margin-bottom: 60px;
 }
@@ -80,6 +104,9 @@ export default {
   font-size: 21px;
   font-weight: bold;
   color: $text-dark;
+}
+.li-form {
+    width: calc(100% - 30px);
 }
 .cards {
     display: flex;

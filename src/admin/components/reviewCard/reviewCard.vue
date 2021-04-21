@@ -14,7 +14,7 @@
                 icon(
                     symbol="pencil" 
                     title="Править" 
-                    @click="$emit('edit', currentReview)"
+                    @click="edit()"
                 )
                 icon(
                     symbol="trash" 
@@ -38,6 +38,21 @@ export default {
     data() {
         return {
             currentReview: {
+                id: '',
+                author: '',
+                occ: '',
+                text: '',
+                preview: ''
+            }
+        }
+    },
+    methods: {
+        edit() {
+            this.setReview();
+            this.$emit('edit', this.currentReview);
+        },
+        setReview() {
+            this.currentReview = {
                 id: this.review.id,
                 author: this.review.author,
                 occ: this.review.occ,
@@ -45,6 +60,9 @@ export default {
                 preview: `https://webdev-api.loftschool.com/${this.review.photo}`
             }
         }
+    },
+    created() {
+        this.setReview();
     },
     computed: {
         cover() {

@@ -5,42 +5,46 @@
             <div class="form-container" slot="content">
             <div class="form-cols">
                 <div class="form-col">
-                <label
-                    :style="{backgroundImage: `url(${newWork.preview})`}"
-                    :class="[ 'uploader', {active: newWork.preview}, {
-                    hovered: hovered
-                    }]"
-                    @dragover="handleDragOver"
-                    @dragleave="hovered = false"
-                    @drop="handleChange"
-                >
-                    <div class="uploader-title">Перетащите или загрузите картинку</div>
-                    <div class="uploader-btn">
-                    <app-button typeAttr="file" @change="handleChange"></app-button>
-                    </div>
-                </label>
+                    <app-input class="input-message"
+                        :error-message="validation.firstError('newWork.preview')"
+                    ></app-input>
+                    <label
+                        :error-message="validation.firstError('newWork.preview')"
+                        :style="{backgroundImage: `url(${newWork.preview})`}"
+                        :class="[ 'uploader', {active: newWork.preview}, {
+                        hovered: hovered
+                        }]"
+                        @dragover="handleDragOver"
+                        @dragleave="hovered = false"
+                        @drop="handleChange"
+                    >
+                        <div class="uploader-title">Перетащите или загрузите картинку</div>
+                        <div class="uploader-btn">
+                        <app-button typeAttr="file" @change="handleChange" :error-message="validation.firstError('newWork.preview')"></app-button>
+                        </div>
+                    </label>
                 </div>
                 <div class="form-col">
                 <div class="form-row">
-                    <app-input v-model="newWork.title" title="Название" />
+                    <app-input v-model="newWork.title" title="Название" :error-message="validation.firstError('newWork.title')"/>
                 </div>
                 <div class="form-row">
-                    <app-input v-model="newWork.link" title="Ссылка" />
+                    <app-input v-model="newWork.link" title="Ссылка" :error-message="validation.firstError('newWork.link')"/>
                 </div>
                 <div class="form-row">
-                    <app-input v-model="newWork.description" field-type="textarea" title="Описание" />
+                    <app-input v-model="newWork.description" field-type="textarea" title="Описание" :error-message="validation.firstError('newWork.description')"/>
                 </div>
                 <div class="form-row">
-                    <tags-adder v-model="newWork.techs" />
+                    <tags-adder v-model="newWork.techs" :error-message="validation.firstError('newWork.techs')" />
                 </div>
                 </div>
             </div>
             <div class="form-btns">
                 <div class="btn cancel">
-                <app-button title="Отмена" plain></app-button>
+                <app-button title="Отмена" typeAttrs="button" @click="$emit('close', $event)" plain></app-button>
                 </div>
                 <div class="btn">
-                <app-button title="Сохранить"></app-button>
+                <app-button title="Сохранить" :disabled="isSubmitDisabled"></app-button>
                 </div>
             </div>
             </div>
@@ -54,7 +58,8 @@ import card from "../card";
 import appButton from "../button";
 import appInput from "../input";
 import tagsAdder from "../tagsAdder";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
+import {Validator} from 'simple-vue-validator';
 
 export default {
     components: { 
@@ -64,14 +69,38 @@ export default {
         tagsAdder 
     },
     props: {
+        emptyCardIsShown: true,
         currentWork: {
             type: Object | null,
             default: null
         }
     },
+    mixin: [require('simple-vue-validator').mixin],
+    validators: {
+        "newWork.title": value => {
+            return Validator.value(value)
+                .maxLength(30)
+                .required("Введите название");
+        },
+        "newWork.link": value => {
+            return Validator.value(value)
+                .url("Введите корректный url")
+                .required("Введите ссылку");
+        },
+        "newWork.description": value => {
+            return Validator.value(value).required("Введите описание");
+        },
+        "newWork.techs": value => {
+            return Validator.value(value).required("Введите теги");
+        },
+        "newWork.preview": value => {
+            return Validator.value(value).required("Загрузите картинку");
+        }
+    },
     data() {
         return {
             hovered: false,
+            isSubmitDisabled: false,
             newWork: {
                 title: "",
                 link: "",
@@ -89,6 +118,11 @@ export default {
     },
     created() {
         this.setWork();
+    },
+    computed: {
+        ...mapState("works", {
+        works: (state) => state.works,
+        }),
     },
     methods: {
             ...mapActions({
@@ -114,51 +148,37 @@ export default {
                 }
             }
         },
-        async createWork(newWork) {
-            try {
-                await this.addNewWork(newWork);
-                this.showTooltip({
-                    text: "Работа успешно добавлена",
-                    type: "success"
-                });
-                this.newWork.title = "";
-                this.newWork.link = "";
-                this.newWork.description = "";
-                this.newWork.techs = "";
-                this.newWork.photo = {};
-                this.newWork.preview = "";
-            } catch (error) {
-                this.showTooltip({
-                    text: error.response.data.error,
-                    type: "error"
-                })
-            }
-        },
-        async updateWork(currentWork) {
-            try {
-                await this.editWork(currentWork);
-                this.newWork.title = "";
-                this.newWork.link = "";
-                this.newWork.description = "";
-                this.newWork.techs = "";
-                this.newWork.photo = {};
-                this.newWork.preview = "";
-                this.showTooltip({
-                    text: "Работа успешно изменена",
-                    type: "success"
-                });
-            } catch (error) {
-                this.showTooltip({
-                    text: error.response.data.error,
-                    type: "error"
-                })
-            }
-        },
-        handleSubmit() {
-            if(!this.newWork.id) {
-                this.createWork(this.newWork);
-            } else {
-                this.updateWork(this.newWork);
+        async handleSubmit() {
+            if(await this.$validate()) {
+                if(!this.newWork.id) {
+                    try {
+                        await this.addNewWork(this.newWork);
+                        this.showTooltip({
+                            text: "Работа успешно добавлена",
+                            type: "success"
+                        });
+                        this.$emit('close');
+                    } catch (error) {
+                        this.showTooltip({
+                            text: "Произошла ошибка",
+                            type: "error"
+                        })
+                    }
+                } else {
+                    try {
+                        await this.editWork(this.newWork);                        
+                        this.showTooltip({
+                            text: "Работа успешно изменена",
+                            type: "success"
+                        });
+                        this.$emit('close');
+                    } catch (error) {
+                        this.showTooltip({
+                            text: "Произошла ошибка",
+                            type: "error"
+                        })
+                    }
+                }
             }
         },
         handleChange(event) {
@@ -170,18 +190,24 @@ export default {
             this.hovered = false;
         },
         renderPhoto(file) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                this.newWork.preview = reader.result;
-            };
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = () => {
+                    this.newWork.preview = reader.result;
+                };
 
-            reader.onerror = () => {
-                console.log('error');
-            };
-            reader.onabort = () => {
-                console.log('abort');
-            };
+                reader.onerror = () => {
+                    this.showTooltip({
+                        text: 'произошла ошибка',
+                        type: "error"
+                    });
+                };
+                reader.onabort = () => {
+                    this.showTooltip({
+                        text: 'произошла ошибка',
+                        type: "error"
+                    });
+                };
         },
     },
 };

@@ -4,9 +4,20 @@
             .container
                 .header
                     .title Блок "{{this.$route.meta.title}}"
-                .form
-                    formWorks(:currentWork="currentWork")
+                
                 ul.cards
+                    li.li-form(v-if="emptyCardIsShown")
+                        formWorks(
+                            :currentWork="currentWork"
+                            @close="closeHandler"
+                            )
+                    li.item.empty-work(v-else)
+                        squareBtn(
+                            type="square"
+                            v-if="emptyCardIsShown == false"
+                            @click="emptyCardIsShown = true"
+                            title="Добавить работу"
+                        )
                     li.item(v-for="work in works" :key="work.id")
                         workCard(
                             :work="work"
@@ -18,22 +29,26 @@
 <script>
 import formWorks from "../../components/formWorks";
 import workCard from "../../components/workCard";
+import squareBtn from "../../components/button/button";
 import { mapState, mapActions } from "vuex";
 
 export default {
     components: { 
         formWorks, 
-        workCard 
+        workCard,
+        squareBtn
     },
     data() {
         return {
+            emptyCardIsShown: false,
             currentWork: null
         }
     },
     computed: {
         ...mapState("works", {
-        works: (state) => state.works,
+            works: (state) => state.works,
         }),
+        
     },
     methods: {
         ...mapActions({
@@ -57,7 +72,20 @@ export default {
             }
         },
         edit(currentWork) {
+            //console.log(currentWork);
             this.currentWork = { ...currentWork };
+            //console.log(currentWork);
+            this.emptyCardIsShown = true;
+        },
+        closeHandler(){
+            this.emptyCardIsShown = false;
+        }
+    },
+    watch: {
+        emptyCardIsShown(){
+            if(!this.emptyCardIsShown){
+                this.currentWork = null
+            }
         }
     },
     mounted() {
@@ -84,6 +112,10 @@ export default {
   color: $text-dark;
 }
 
+.li-form {
+    width: 100%;
+}
+
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -93,9 +125,5 @@ export default {
 .item {
     width: calc(100% / 3 - 20px);
     margin-left: 20px;
-}
-
-.form {
-    margin-bottom: 30px;
 }
 </style>

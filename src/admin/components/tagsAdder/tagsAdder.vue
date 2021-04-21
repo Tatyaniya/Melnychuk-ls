@@ -4,7 +4,10 @@
             title="Добавление тега"
             :value="currentTags"
             @input="inputTags"
+            :error-message="errorMessage"
         )
+
+            
         ul.tags
             li.tag(
                 v-if="tag.trim()"
@@ -31,7 +34,11 @@ export default {
         tags: {
             type: String, 
             default: ""
-        }
+        },
+        errorMessage: {
+            type: String,
+            default: ""
+        },
     },
     model: {
         prop: "tags",

@@ -5,7 +5,9 @@
                 .form-container(slot="content")
                     .form-data
                         .upload-image
+                            app-input(:error-message="validation.firstError('newReview.preview')")
                             label(
+                                :error-message="validation.firstError('newReview.preview')"
                                 :style="{backgroundImage: `url(${newReview.preview})`}"
                                 :class="[ 'uploader', {active: newReview.preview}, { hovered: hovered }]"
                                 @dragover="handleDragOver"
@@ -24,20 +26,23 @@
                                 appInput(
                                     title="Имя автора" 
                                     v-model="newReview.author"
+                                    :error-message="validation.firstError('newReview.author')"
                                 )
                                 appInput(
                                     title="Титул автора" 
                                     v-model="newReview.occ"
+                                    :error-message="validation.firstError('newReview.occ')"
                                 )
                             .form-row
                                 appInput(
                                     title="Отзыв" 
                                     field-type="textarea" 
                                     v-model="newReview.text"
+                                    :error-message="validation.firstError('newReview.text')"
                                 )
                     .form-buttons
-                        appButton.cancel-btn(title="Отмена" plain)
-                        appButton(title="Сохранить")
+                        appButton.cancel-btn(title="Отмена" @click="$emit('close', $event)" plain)
+                        appButton(title="Сохранить" :disabled="isSubmitDisabled")
 </template>
 
 <script>
@@ -45,6 +50,8 @@ import card from "../card";
 import appButton from "../button";
 import appInput from "../input";
 import { mapActions } from "vuex";
+import { Validator } from 'simple-vue-validator';
+
 export default {
     components: { 
         card, 
@@ -57,6 +64,21 @@ export default {
             default: null
         }
     },
+    mixin: [require('simple-vue-validator').mixin],
+    validators: {
+        "newReview.author": value => {
+            return Validator.value(value).required("Введите имя");
+        },
+        "newReview.text": value => {
+            return Validator.value(value).required("Введите отзыв");
+        },
+        "newReview.occ": value => {
+            return Validator.value(value).required("Введите должность");
+        } ,
+        "newReview.preview": value => {
+            return Validator.value(value).required("Загрузите картинку");
+        }
+    },
     data() {
         return {
             hovered: false,
@@ -67,6 +89,7 @@ export default {
                 photo: {},
                 preview: "",
             },
+            isSubmitDisabled: false,
         };
     },
     watch: {
@@ -100,42 +123,30 @@ export default {
             e.preventDefault();
             this.hovered = true;
         },
-        async createReview() {
-            try {
-                await this.addNewReview(this.newReview);
-                this.showTooltip({
-                    text: "Отзыв успешно добавлен",
-                    type: "success"
-                });
-                this.newReview.author = "";
-                this.newReview.occ = "";
-                this.newReview.text = "";
-                this.newReview.photo = {};
-                this.newReview.preview = "";
-            } catch (error) {
-                this.showTooltip({
-                    text: error.response.data.error,
-                    type: "error"
-                })
-            }
-        },
-        async updateReview(review) {
-            await this.editReview(review);
-            this.showTooltip({
-                    text: "Отзыв успешно изменен",
-                    type: "success"
-                });
-                this.newReview.author = "";
-                this.newReview.occ = "";
-                this.newReview.text = "";
-                this.newReview.photo = {};
-                this.newReview.preview = "";
-        },
         async handleSubmit() {
-            if(!this.newReview.id) {
-                this.createReview();
-            } else {
-                this.updateReview(this.newReview);
+            if(await this.$validate()) {
+                if(!this.newReview.id) {
+                    try {
+                        await this.addNewReview(this.newReview);
+                        this.showTooltip({
+                            text: "Отзыв успешно добавлен",
+                            type: "success"
+                        });
+                        this.$emit('close');
+                    } catch (error) {
+                        this.showTooltip({
+                            text: "Произошла ошибка",
+                            type: "error"
+                        })
+                    }
+                } else {
+                    await this.editReview(this.newReview);
+                    this.showTooltip({
+                            text: "Отзыв успешно изменен",
+                            type: "success"
+                        });
+                    this.$emit('close');
+                }
             }
         },
         handleChange(event) {
@@ -165,6 +176,9 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+.form-reviews-component {
+    margin-bottom: 30px;
+}
 .form-data {
   display: flex;
   padding: 0 33px;
@@ -237,6 +251,11 @@ export default {
   &:last-child {
     margin-right: 0;
   }
+}
+
+.upload-image>.input {
+    height: 0;
+    border: none;
 }
 
 .form-buttons .cancel-btn.default-btn-container {

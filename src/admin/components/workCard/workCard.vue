@@ -14,7 +14,7 @@
         </div>
         <a :href="work.link" class="link">{{work.link}}</a>
         <div class="btns">
-          <icon symbol="pencil" title="Править" @click="$emit('edit', currentWork)"></icon>
+          <icon symbol="pencil" title="Править" @click="edit()"></icon>
           <icon symbol="trash" title="Удалить" @click="$emit('remove', currentWork)"></icon>
         </div>
       </div>
@@ -39,6 +39,22 @@ export default {
     data() {
         return {
             currentWork: {
+                id: '',
+                title: '',
+                description: '',
+                link: '',
+                techs: '',
+                preview: ''
+            }
+        }
+    },
+    methods: {
+        edit() {
+            this.setCurrentWork();
+            this.$emit('edit', this.currentWork);
+        },
+        setCurrentWork() {
+            this.currentWork = {
                 id: this.work.id,
                 title: this.work.title,
                 description: this.work.description,
@@ -47,6 +63,9 @@ export default {
                 preview: `https://webdev-api.loftschool.com/${this.work.photo}`
             }
         }
+    },
+    created() {
+        this.setCurrentWork();
     },
     computed: {
         cover() {
