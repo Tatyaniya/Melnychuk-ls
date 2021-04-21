@@ -121,6 +121,15 @@ export default {
         },
         async updateReview(review) {
             await this.editReview(review);
+            this.showTooltip({
+                    text: "Отзыв успешно изменен",
+                    type: "success"
+                });
+                this.newReview.author = "";
+                this.newReview.occ = "";
+                this.newReview.text = "";
+                this.newReview.photo = {};
+                this.newReview.preview = "";
         },
         async handleSubmit() {
             if(!this.newReview.id) {

@@ -8,6 +8,7 @@ export default {
             state.categories = categories;
         },
         ADD_CATEGORY(state, category) {
+            category.skills = [];
             state.categories.unshift(category);
         },
         DELETE_CATEGORY(state, id) {

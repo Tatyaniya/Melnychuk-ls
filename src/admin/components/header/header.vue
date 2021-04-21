@@ -19,11 +19,6 @@ export default {
         headline,
         user,
         navigation        
-    },
-    methods: {
-        createSkill() {
-            this.addSkillAction();
-        },
     }
 };
 </script>

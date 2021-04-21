@@ -17,7 +17,7 @@
                         )
             .bottom-line
                 skillAddLine(
-                    @approve="$emit('createSkill', $event)"
+                    @createSkill="$emit('createSkill', $event)"
                     :blocked="empty"
                 )
 </template>

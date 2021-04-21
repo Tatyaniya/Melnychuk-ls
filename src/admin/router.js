@@ -25,8 +25,8 @@ const routes = [
   {
     path: "/works",
     components: {
-      default: works,
-      header: header
+        default: works,
+        header: header
     },
     meta: {
         title: "Работы"
@@ -35,8 +35,8 @@ const routes = [
   {
     path: "/reviews",
     components: {
-      default: reviews,
-      header: header
+        default: reviews,
+        header: header
     },
     meta: {
         title: "Отзывы"
@@ -83,8 +83,6 @@ router.beforeEach(async (to, from, next) => {
                 (from.path === "/login") ? next() : next({ path: from.path });
             } catch (e) {
                 console.warn('[строка 85] The user\'s object was not fetched');
-
-                next();
                 
                 localStorage.removeItem('token');
 

@@ -207,6 +207,10 @@
 }
 
 .works-data {
+    flex-shrink: 0;
+    width: 25%;
+    padding-left: 12px;
+
     &__tags {
         display: flex;
         margin-bottom: 35px;
@@ -229,10 +233,10 @@
     }
 
     &__subtitle {
-        font-size: 30px;
+        font-size: 27px;
         line-height: 41px;
         font-weight: 700;
-        margin-bottom: 35px;
+        margin-bottom: 30px;
 
         @include desktop {
             text-align: center;
@@ -248,7 +252,7 @@
         font-weight: 600;
         line-height: 30px;
         color: rgba($text-dark, .8);
-        margin-bottom: 45px;
+        margin-bottom: 30px;
 
         @include desktop {
             width: 420px;

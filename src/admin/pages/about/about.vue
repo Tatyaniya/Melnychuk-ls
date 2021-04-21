@@ -58,7 +58,6 @@ export default {
             deleteCategoryAction: 'categories/deleteCat',
             editCategoryAction: 'categories/editCat',
             getCategoriesAction: 'categories/getCats',
-            getUserAction: 'user/getUser',
             addSkillAction: "skills/add",
             editSkillAction: "skills/edit",
             removeSkillAction: "skills/remove",
@@ -167,7 +166,6 @@ export default {
         }
     },
     created() {
-        this.getUserAction();
         this.getCategoriesAction();
     },
 };

@@ -43,7 +43,6 @@ export default {
         icon,
         appInput: input
     }
-    
 }
 
 </script>
