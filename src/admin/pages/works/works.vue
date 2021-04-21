@@ -72,9 +72,7 @@ export default {
             }
         },
         edit(currentWork) {
-            //console.log(currentWork);
             this.currentWork = { ...currentWork };
-            //console.log(currentWork);
             this.emptyCardIsShown = true;
         },
         closeHandler(){

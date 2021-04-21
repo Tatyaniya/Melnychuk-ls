@@ -74,7 +74,6 @@ export default {
              this.emptyCardIsShown = true;
         },
         closeHandler(){
-            console.log('here');
             this.emptyCardIsShown = false;
         }
     },

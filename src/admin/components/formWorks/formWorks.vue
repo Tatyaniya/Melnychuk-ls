@@ -121,7 +121,7 @@ export default {
     },
     computed: {
         ...mapState("works", {
-        works: (state) => state.works,
+            works: (state) => state.works,
         }),
     },
     methods: {

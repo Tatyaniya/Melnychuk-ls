@@ -92,9 +92,5 @@ new Vue({
     async created() {
         const { data } = await axios.get("/works/454");
         this.works = data;
-        
-        this.works.forEach(work => {
-            console.log(work.techs);
-        })
     }
 });

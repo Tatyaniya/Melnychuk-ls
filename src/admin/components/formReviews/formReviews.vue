@@ -165,10 +165,16 @@ export default {
             };
 
             reader.onerror = () => {
-                console.log('error');
+                this.showTooltip({
+                    text: 'произошла ошибка',
+                    type: "error"
+                });
             };
             reader.onabort = () => {
-                console.log('abort');
+                this.showTooltip({
+                    text: 'произошла ошибка',
+                    type: "error"
+                });
             };
         },
     },

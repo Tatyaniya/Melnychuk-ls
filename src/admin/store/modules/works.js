@@ -18,7 +18,7 @@ export default {
                 if(work.id == workEdited.work.id) {
                     work = workEdited.work;
                 }
-                console.log(work);
+                
                 return work;
             });
         }
@@ -65,7 +65,7 @@ export default {
             try {
                 const { data } = await this.$axios.post(`/works/${work.id}`, formData);
                 commit("EDIT_WORK", data);
-                console.log(data);
+                
                 return data;
             } catch (error) {
                 throw new Error('Ошибка редактирования работы');
