@@ -26,11 +26,7 @@ script(type="text/x-template")#works-display
         )
         
 script(type="text/x-template")#works-thumbs
-    transition-group.works-slider__thumbs(
-        tag="ul"
-        css="false"
-        @enter="enterCb"
-        )
+    ul.works-slider__thumbs
         li.works-slider__item(
             v-for="slide in works" :key="slide.id"
             :class="{active: currentWork.id === slide.id}"
