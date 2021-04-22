@@ -1,5 +1,9 @@
 import Vue from "vue";
+import axios from "axios";
+import config from "../../env.paths.json";
 import Flickity from 'vue-flickity';
+
+
 
 new Vue({
     el: '#reviews-template',
@@ -20,10 +24,11 @@ new Vue({
             }
         }
     },
-    created() {
-        const reviews = require("../data/reviews.json");
-        this.reviews = reviews.map(review => {
-            review.pic = require(`../images/content/${review.pic}`).default;
+    async created() {
+        const { data } = await axios.get("/reviews/454");
+        
+        this.reviews = data.map(review => {
+            review.photo = `https://webdev-api.loftschool.com/${review.photo}`;
             return review;
         });
     },
@@ -35,12 +40,12 @@ new Vue({
             return this.count !== this.currentSlide;
         }
     },
-    mounted() {
-        this.$refs.flickity.on('change', index => {
-            this.currentSlide = index;
-        });
-
-        this.count = this.$refs.flickity.slides().length - 1
+    watch: {
+        reviews() {
+            if(this.reviews.length) {
+                this.loadFlickity()
+            }
+        }
     },
     methods: {
         next() {
@@ -48,6 +53,15 @@ new Vue({
         },
         prev() {
           this.$refs.flickity.previous();
+        },
+        loadFlickity() {
+            this.$nextTick(() => {
+                this.$refs.flickity.on('change', index => {
+                    this.currentSlide = index;
+                });
+        
+                this.count = this.$refs.flickity.slides().length - 1
+            })
         }
     }
 })

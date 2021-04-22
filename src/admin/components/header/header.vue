@@ -1,6 +1,9 @@
 <template lang="pug">
     .header-component
-        headline(title="Панель администрирования")
+        headline(
+            title="Панель администрирования"
+            @logout="$emit('logout')"
+        )
             user
         navigation
 </template>
@@ -10,11 +13,12 @@ import headline from "../../components/headline";
 import user from "../../components/user";
 import navigation from "../../components/navigation";
 
+
 export default {
     components: { 
         headline,
         user,
         navigation        
-        },
+    }
 };
 </script>

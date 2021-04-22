@@ -2,9 +2,12 @@
     .tags-adder-components 
         addInput(
             title="Добавление тега"
-            v-model="currentTags"
-            @input="$emit('change', currentTags)"
+            :value="currentTags"
+            @input="inputTags"
+            :error-message="errorMessage"
         )
+
+            
         ul.tags
             li.tag(
                 v-if="tag.trim()"
@@ -31,7 +34,11 @@ export default {
         tags: {
             type: String, 
             default: ""
-        }
+        },
+        errorMessage: {
+            type: String,
+            default: ""
+        },
     },
     model: {
         prop: "tags",
@@ -40,6 +47,11 @@ export default {
     data() {
         return {
             currentTags: this.tags
+        }
+    },
+    watch: {
+        tags() {
+            this.currentTags = this.tags;
         }
     },
     computed: {
@@ -58,6 +70,9 @@ export default {
             this.currentTags = tags.join(", ");
 
             this.$emit('change', this.currentTags);
+        },
+        inputTags(val) {
+            this.$emit('change', val);
         }
     }
 }

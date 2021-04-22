@@ -4,17 +4,25 @@
             slot
             .title {{title}}
             .buttons
-                button.btn(type="button") Выйти
+                button.btn(
+                    type="button"
+                    @click="logout"
+                ) Выйти
 </template>
 
 <script>
 export default {
-  props: {
-    title: {
-      type: String,
-      default: "Панель администрирования"
+    props: {
+        title: {
+        type: String,
+        default: "Панель администрирования"
+        }
+    },
+    methods: {
+        logout() {
+            this.$emit('logout');
+        }
     }
-  }
 }
 </script>
 

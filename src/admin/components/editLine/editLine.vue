@@ -14,7 +14,7 @@
           :errorMessage="validation.firstError('title')"
           v-model="title"
           @input="$emit('input', $event)"
-          @keydown.native.enter="onApprove"
+          @keydown.native.enter="$emit('approve')"
           autofocus="autofocus"
           no-side-paddings="no-side-paddings"
         ></app-input>
@@ -24,7 +24,7 @@
           <icon symbol="tick" @click="onApprove"></icon>
         </div>
         <div class="button-icon">
-          <icon symbol="cross" @click="$emit('remove')"></icon>
+          <icon symbol="cross" @click="$emit('remove', $event)"></icon>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@ import {Validator} from 'simple-vue-validator';
 export default {
     mixin: [require('simple-vue-validator').mixin],
     validators: {
-        title: (value) => {
+        "title": (value) => {
             return Validator.value(value).required('Заполните поле');
         }
     },
@@ -50,8 +50,8 @@ export default {
             type: String,
             default: ""
         },
-            blocked: Boolean,
-            editModeByDefault: Boolean
+        blocked: Boolean,
+        editModeByDefault: Boolean
     },
     data() {
         return {
@@ -62,12 +62,9 @@ export default {
     methods: {
         onApprove() {
             this.$validate().then(success => {
-                if (!success) {
-                    return;
-                } else if (this.title.trim() === this.value.trim()) {
-                    this.editmode = false;
-                } else {
+                if (success) {
                     this.$emit("approve", this.value);
+                    this.editmode = false;
                 }
             })          
         }

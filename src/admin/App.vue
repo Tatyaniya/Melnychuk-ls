@@ -1,23 +1,38 @@
 <template lang="pug">
     .app-container
-        router-view(name="header")
+        router-view(name="header" @logout="logout")
         router-view
+        .notify-container(:class="{active: isTooltipShown}")
+            .notification
+                notification(
+                    :text="tooltipText"
+                    :type="tooltipType"
+                    @click="hideTooltip"
+                )
 </template>
 
 <script>
-
+import { mapActions, mapState } from 'vuex';
+import notification from "./components/notification";
 
 export default {
-    components: {},
-      
-    data() {
-        return {
-            // categories: [],
-            // emptyCatIsShow: false
-        }
+    components: { notification },
+    computed: {
+        ...mapState("tooltips", {
+        isTooltipShown: state => state.isShown,
+        tooltipText: state => state.text,
+        tooltipType: state => state.type,
+        }),
     },
-    created() {
-        //this.categories = require("./data/categories.json");
+    methods: {
+        ...mapActions({
+            logoutAction: 'user/userOut',
+            hideTooltip: "tooltips/hide"
+        }),
+        async logout() {
+            await this.logoutAction();
+            this.$router.replace('/login');
+        }
     }
 }
 
