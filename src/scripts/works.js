@@ -65,9 +65,6 @@ new Vue({
         }
     },
     methods: {
-        enterCb(el, done) {
-
-        },
         makeInfiniteLoopForNdx(index) {
             const worksNumber = this.works.length - 1;
             if (index < 0) this.currentIndex = worksNumber;
